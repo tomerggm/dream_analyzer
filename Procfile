@@ -1,1 +1,1 @@
-web: python dream_analyzer.py 
+web: gunicorn dream_analyzer:app 
