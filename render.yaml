@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: dream-interpreter
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn dream_analyzer:app 

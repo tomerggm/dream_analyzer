@@ -1,0 +1,1 @@
+web: gunicorn dream_analyzer:app 

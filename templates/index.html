@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מפרש החלומות</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>מפרש החלומות</h1>
+        <p>תארו את החלום שלכם, והבינה המלאכותית תספק פירוש.</p>
+        
+        <form id="dreamForm" action="/interpret" method="post">
+            <textarea id="dream" name="dream" rows="5" placeholder="תארו את החלום שלכם כאן..."></textarea>
+            <button type="submit">פרש את החלום</button>
+        </form>
+        
+        <div id="result" class="hidden">
+            <h2>פירוש החלום</h2>
+            <p id="interpretationText"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("dreamForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            let dreamText = document.getElementById("dream").value;
+            let resultDiv = document.getElementById("result");
+            let interpretationText = document.getElementById("interpretationText");
+            
+            resultDiv.classList.add("hidden");
+            
+            let response = await fetch("/interpret", {
+                method: "POST",
+                headers: {"Content-Type": "application/x-www-form-urlencoded"},
+                body: new URLSearchParams({dream: dreamText})
+            });
+            
+            let data = await response.json();
+            if (data.interpretation) {
+                interpretationText.textContent = data.interpretation;
+                resultDiv.classList.remove("hidden");
+            } else {
+                interpretationText.textContent = "Error: " + data.error;
+                resultDiv.classList.remove("hidden");
+            }
+        });
+    </script>
+</body>
+</html>
