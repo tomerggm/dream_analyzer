@@ -214,3 +214,72 @@ body::after {
     50% { transform: translateY(-20px) translateX(10px); }
     100% { transform: translateY(0) translateX(0); }
 }
+
+/* שאר הטקסטים באתר ישארו עם הפונט הרגיל */
+h1, h2, p:not(#interpretationText) {
+    /* נמחק לגמרי */
+}
+
+/* Mobile Responsive Design */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        margin: 10px;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+
+    textarea {
+        font-size: 16px;
+        padding: 15px;
+        min-height: 120px;
+    }
+
+    button {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+
+    #result {
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+    /* Make moon smaller on mobile */
+    body::before {
+        width: 100px;
+        height: 100px;
+        top: 20px;
+        right: 20px;
+    }
+
+    /* Adjust interpretation text */
+    #interpretationText {
+        font-size: 1.1em;
+        line-height: 1.6;
+    }
+}
+
+/* Small phones */
+@media screen and (max-width: 480px) {
+    .container {
+        margin: 5px;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    /* Hide moon on very small screens */
+    body::before {
+        display: none;
+    }
+}
