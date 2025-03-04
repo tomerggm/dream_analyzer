@@ -3,4 +3,4 @@ services:
     name: dream-interpreter
     runtime: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn dream_analyzer:app 
+    startCommand: python dream_analyzer.py 
