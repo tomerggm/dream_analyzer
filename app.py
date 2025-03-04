@@ -4,8 +4,11 @@ from openai import OpenAI
 
 app = Flask(__name__)
 
-# Move API key to environment variable
-client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+# Initialize OpenAI client without proxies
+client = OpenAI(
+    api_key=os.getenv('OPENAI_API_KEY'),
+    http_client=None  # This will use the default client without proxies
+)
 
 @app.route('/')
 def index():
@@ -33,4 +36,4 @@ def interpret():
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(host='0.0.0.0', port=port)
