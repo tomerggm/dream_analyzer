@@ -3,46 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מפרש החלומות</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>מפרש החלומות - פירוש חלומות אונליין בעברית</title>
+    <meta name="description" content="פירוש חלומות אונליין בעברית - קבלו פירוש מקצועי ומעמיק לחלומות שלכם באמצעות בינה מלאכותית מתקדמת">
+    <meta name="keywords" content="פירוש חלומות, חלומות, פתרון חלומות, פענוח חלומות, חלום, משמעות החלום, בינה מלאכותית">
+    
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="מפרש החלומות - פירוש חלומות אונליין">
+    <meta property="og:description" content="קבלו פירוש מקצועי ומעמיק לחלומות שלכם באמצעות בינה מלאכותית">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dream-analyzer.onrender.com">
+    
+    <!-- Additional Meta Tags -->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Dream Analyzer">
+    <meta name="language" content="Hebrew">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/static/favicon.png">
+    
     <link rel="stylesheet" href="/static/styles.css">
+
+    <!-- Add structured data for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "מפרש החלומות",
+      "description": "פירוש חלומות אונליין חינם - פענוח מקצועי של חלומות באמצעות בינה מלאכותית",
+      "url": "https://dream-analyzer.onrender.com",
+      "applicationCategory": "LifestyleApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "ILS"
+      }
+    }
+    </script>
 </head>
 <body>
     <div class="container">
-        <h1>מפרש החלומות</h1>
-        <p>תארו את החלום שלכם, והבינה המלאכותית תספק פירוש.</p>
+        <h1>מפרש החלומות - פירוש חלומות אונליין</h1>
         
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <span class="benefit-icon">⚡️</span>
+                <span class="benefit-text">פירוש מיידי 24/7</span>
+            </div>
+            <div class="benefit-item">
+                <span class="benefit-icon">🔍</span>
+                <span class="benefit-text">ניתוח מעמיק ומקצועי</span>
+            </div>
+            <div class="benefit-item">
+                <span class="benefit-icon">🎁</span>
+                <span class="benefit-text">שירות חינמי לחלוטין</span>
+            </div>
+            <div class="benefit-item">
+                <span class="benefit-icon">🔒</span>
+                <span class="benefit-text">פרטיות מלאה</span>
+            </div>
+            <div class="benefit-item">
+                <span class="benefit-icon">🇮🇱</span>
+                <span class="benefit-text">ממשק ידידותי בעברית</span>
+            </div>
+        </div>
+
+        <div class="intro-text">
+            <p>ברוכים הבאים למפרש החלומות - הכלי המתקדם ביותר לפענוח והבנת החלומות שלכם.</p>
+        </div>
+
         <form id="dreamForm" action="/interpret" method="post">
             <textarea id="dream" name="dream" rows="5" placeholder="תארו את החלום שלכם כאן..."></textarea>
             <button type="submit">פרש את החלום</button>
         </form>
-        
+
+        <div id="loading" class="loading hidden">
+            <div>
+                <div class="loading-text">מפענח את החלום שלך...</div>
+                <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
         <div id="result" class="hidden">
             <h2>פירוש החלום</h2>
             <p id="interpretationText"></p>
         </div>
+
+        <!-- Add FAQ section for SEO -->
+        <div class="faq-section">
+            <h3>שאלות נפוצות על פירוש חלומות</h3>
+            <details>
+                <summary>למה חשוב לפרש חלומות?</summary>
+                <p>פירוש חלומות מאפשר לנו להבין טוב יותר את התת-מודע שלנו ואת הרגשות והמחשבות העמוקים שלנו.</p>
+            </details>
+            <details>
+                <summary>האם כל החלומות הם בעלי משמעות?</summary>
+                <p>כן, לכל חלום יש משמעות ומסר עבורנו, גם אם לעתים המשמעות אינה ברורה מיד.</p>
+            </details>
+            <details>
+                <summary>איך עובד פירוש החלומות האוטומטי?</summary>
+                <p>המערכת שלנו משתמשת בבינה מלאכותית מתקדמת לניתוח החלום שלכם ומספקת פירוש מקצועי בהתבסס על ידע נרחב בתחום.</p>
+            </details>
+        </div>
     </div>
+
+    <!-- Add footer with relevant links -->
+    <footer>
+        <p>מפרש החלומות - הדרך המקצועית לפירוש חלומות אונליין</p>
+    </footer>
 
     <script>
         document.getElementById("dreamForm").addEventListener("submit", async function(event) {
             event.preventDefault();
             let dreamText = document.getElementById("dream").value;
             let resultDiv = document.getElementById("result");
+            let loadingDiv = document.getElementById("loading");
             let interpretationText = document.getElementById("interpretationText");
             
+            // Hide result and show loading
             resultDiv.classList.add("hidden");
+            loadingDiv.classList.remove("hidden");
             
-            let response = await fetch("/interpret", {
-                method: "POST",
-                headers: {"Content-Type": "application/x-www-form-urlencoded"},
-                body: new URLSearchParams({dream: dreamText})
-            });
-            
-            let data = await response.json();
-            if (data.interpretation) {
-                interpretationText.textContent = data.interpretation;
-                resultDiv.classList.remove("hidden");
-            } else {
-                interpretationText.textContent = "Error: " + data.error;
+            try {
+                let response = await fetch("/interpret", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/x-www-form-urlencoded"},
+                    body: new URLSearchParams({dream: dreamText})
+                });
+                
+                let data = await response.json();
+                
+                // Hide loading
+                loadingDiv.classList.add("hidden");
+                
+                if (data.interpretation) {
+                    interpretationText.textContent = data.interpretation;
+                    resultDiv.classList.remove("hidden");
+                } else {
+                    interpretationText.textContent = "Error: " + data.error;
+                    resultDiv.classList.remove("hidden");
+                }
+            } catch (error) {
+                // Hide loading and show error
+                loadingDiv.classList.add("hidden");
+                interpretationText.textContent = "אירעה שגיאה בפענוח החלום. אנא נסו שנית.";
                 resultDiv.classList.remove("hidden");
             }
         });

@@ -8,11 +8,12 @@ body {
     background: linear-gradient(135deg, #2a1b3d 0%, #1a1b4b 100%);
     background-attachment: fixed;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 .container {
+    flex: 1;
     width: 100%;
     max-width: 800px;
     margin: 20px;
@@ -146,7 +147,9 @@ button:active {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
+    opacity: 0;
+    visibility: hidden;
 }
 
 h2 {
@@ -227,8 +230,9 @@ h1, h2, p:not(#interpretationText) {
     }
 
     .container {
-        margin: 10px;
+        margin: 10px auto;
         padding: 20px;
+        width: calc(100% - 20px);
     }
 
     h1 {
@@ -281,5 +285,201 @@ h1, h2, p:not(#interpretationText) {
     /* Hide moon on very small screens */
     body::before {
         display: none;
+    }
+}
+
+/* Add these styles */
+.intro-text {
+    margin-bottom: 30px;
+    text-align: right;
+}
+
+.intro-text h2 {
+    color: #4a154b;
+    margin-bottom: 15px;
+}
+
+.intro-text ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.intro-text li {
+    background: rgba(138, 43, 226, 0.1);
+    padding: 15px 25px 15px 35px;
+    border-radius: 50px;
+    position: relative;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(138, 43, 226, 0.2);
+    display: flex;
+    align-items: center;
+    font-size: 1.1em;
+    color: #4a154b;
+}
+
+.intro-text li:before {
+    content: "✨";
+    position: absolute;
+    right: 15px;
+    color: #8a2be2;
+    font-size: 1.2em;
+}
+
+.intro-text li:hover {
+    transform: translateY(-2px);
+    background: rgba(138, 43, 226, 0.15);
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.1);
+}
+
+.faq-section {
+    margin: 40px 0;
+}
+
+details {
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: #4a154b;
+}
+
+footer {
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+footer a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Loading animation */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.loading-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.loading-dots span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #8a2be2;
+    animation: bounce 0.5s alternate infinite;
+}
+
+.loading-dots span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.loading-dots span:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+}
+
+.loading-text {
+    color: #4a154b;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+    .intro-text ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .intro-text li {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        justify-content: center;
+    }
+}
+
+/* Benefits Grid */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.benefit-item {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(138, 43, 226, 0.1);
+}
+
+.benefit-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.1);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.benefit-icon {
+    font-size: 1.5em;
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(138, 43, 226, 0.1);
+    border-radius: 50%;
+    padding: 8px;
+}
+
+.benefit-text {
+    color: #4a154b;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
     }
 }
