@@ -2,22 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://halomotai.co.il/</loc>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://halomotai.co.il/faq</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://halomotai.co.il/articles/dream-interpretation-guide</loc>
-    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://halomotai.co.il/articles/ai-dream-interpretation</loc>
-    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://halomotai.co.il/faq</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 </urlset> 
