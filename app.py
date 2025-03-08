@@ -38,16 +38,9 @@ def interpret():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/robots.txt')
+@app.route('/sitemap.xml')
 def static_from_root():
     return send_from_directory(app.static_folder, request.path[1:])
-
-@app.route('/sitemap.xml')
-def sitemap():
-    response = make_response(
-        render_template('sitemap.xml')
-    )
-    response.headers['Content-Type'] = 'application/xml'
-    return response
 
 @app.route('/articles/dream-interpretation-guide')
 def dream_guide():
