@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, jsonify, send_from_directory
+from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, url_for
 from openai import OpenAI
 
 app = Flask(__name__)
@@ -38,6 +38,26 @@ def interpret():
 @app.route('/sitemap.xml')
 def static_from_root():
     return send_from_directory(app.static_folder, request.path[1:])
+
+@app.route('/articles/dream-interpretation-guide')
+def dream_guide():
+    return render_template('articles/dream-interpretation-guide.html')
+
+@app.route('/articles/ai-dream-interpretation')
+def ai_interpretation():
+    return render_template('articles/ai-dream-interpretation.html')
+
+@app.route('/חלומות')
+def dreams_hebrew():
+    return redirect(url_for('index'))
+
+@app.route('/פירוש-חלומות')
+def dream_interpretation_hebrew():
+    return redirect(url_for('index'))
+
+@app.route('/faq')
+def faq():
+    return render_template('faq.html')
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 8080))

@@ -6,22 +6,25 @@
     
     <!-- SEO Meta Tags -->
     <title>מפרש החלומות - פירוש חלומות באמצעות בינה מלאכותית</title>
-    <meta name="description" content="פירוש חלומות אונליין בעברית - קבלו פירוש מקצועי ומעמיק לחלומות שלכם באמצעות בינה מלאכותית מתקדמת">
-    <meta name="keywords" content="פירוש חלומות, חלומות, פתרון חלומות, פענוח חלומות, חלום, משמעות החלום, בינה מלאכותית">
+    <meta name="description" content="חלומות - פירוש מקצועי ומעמיק של חלומות באמצעות בינה מלאכותית. קבלו משמעות מדויקת לחלומות שלכם באופן מיידי וחינמי. פענוח חלומות אונליין בעברית.">
+    <meta name="keywords" content="חלומות, פירוש חלומות, פתרון חלומות, פענוח חלומות, משמעות חלומות, חלום, ספר החלומות, פשר חלומות">
     
     <!-- Open Graph Meta Tags for Social Media -->
-    <meta property="og:title" content="מפרש החלומות - פירוש חלומות באמצעות בינה מלאכותית">
-    <meta property="og:description" content="קבלו פירוש מקצועי ומעמיק לחלומות שלכם באמצעות בינה מלאכותית">
+    <meta property="og:title" content="חלומות - פירוש מקצועי ומיידי לחלומות שלכם">
+    <meta property="og:description" content="פירוש חלומות אונליין בעברית - גלו את המשמעות האמיתית של החלומות שלכם באופן מיידי וחינמי">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://halomotai.co.il">
     
     <!-- Additional Meta Tags -->
-    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://halomotai.co.il" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="author" content="Dream Analyzer">
     <meta name="language" content="Hebrew">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/static/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon.png') }}">
+    <meta property="og:image" content="https://halomotai.co.il{{ url_for('static', filename='logo.png') }}">
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-03VBN4LXFH"></script>
@@ -33,24 +36,38 @@
         gtag('config', 'G-03VBN4LXFH');
     </script>
     
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/styles.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/static/styles.css"></noscript>
+
+    <!-- Preload important resources -->
+    <link rel="preload" href="/static/favicon.png" as="image">
 
     <!-- Add structured data for Google -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
+      "@type": ["WebApplication", "WebSite", "FAQPage"],
       "name": "מפרש החלומות",
-      "description": "פירוש חלומות אונליין חינם - פענוח מקצועי של חלומות באמצעות בינה מלאכותית",
-      "url": "https://halomot.co.il",
-      "applicationCategory": "LifestyleApplication",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "ILS"
-      }
+      "description": "חלומות - פירוש וניתוח מקצועי של חלומות באמצעות בינה מלאכותית",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "מה המשמעות של חלומות חוזרים?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "חלומות חוזרים מצביעים בדרך כלל על נושא או בעיה שטרם פתרנו בחיינו"
+        }
+      }],
+      "url": "https://halomotai.co.il",
+      "sameAs": [
+        "https://halomotai.co.il/חלומות",
+        "https://halomotai.co.il/פירוש-חלומות"
+      ]
     }
     </script>
+
+    <link rel="alternate" hreflang="he" href="https://halomotai.co.il" />
+    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
 </head>
 <body>
     <div class="container">
@@ -81,6 +98,12 @@
 
         <div class="intro-text">
             <p>ברוכים הבאים למפרש החלומות - הכלי המתקדם ביותר לפענוח והבנת החלומות שלכם.</p>
+            <div class="faq-button-container">
+                <a href="{{ url_for('faq') }}" class="faq-button">
+                    <span class="faq-icon">❓</span>
+                    <span>שאלות נפוצות על חלומות</span>
+                </a>
+            </div>
         </div>
 
         <form id="dreamForm" action="/interpret" method="post">
@@ -104,27 +127,46 @@
             <p id="interpretationText"></p>
         </div>
 
-        <!-- Add FAQ section for SEO -->
-        <div class="faq-section">
-            <h3>שאלות נפוצות על פירוש חלומות</h3>
-            <details>
-                <summary>למה חשוב לפרש חלומות?</summary>
-                <p>פירוש חלומות מאפשר לנו להבין טוב יותר את התת-מודע שלנו ואת הרגשות והמחשבות העמוקים שלנו.</p>
-            </details>
-            <details>
-                <summary>האם כל החלומות הם בעלי משמעות?</summary>
-                <p>כן, לכל חלום יש משמעות ומסר עבורנו, גם אם לעתים המשמעות אינה ברורה מיד.</p>
-            </details>
-            <details>
-                <summary>איך עובד פירוש החלומות האוטומטי?</summary>
-                <p>המערכת שלנו משתמשת בבינה מלאכותית מתקדמת לניתוח החלום שלכם ומספקת פירוש מקצועי בהתבסס על ידע נרחב בתחום.</p>
-            </details>
+        <!-- Articles Section -->
+        <div class="articles-section">
+            <h3>מאמרים מומלצים</h3>
+            <div class="articles-grid">
+                <article class="article-card">
+                    <div class="article-icon">📚</div>
+                    <h4>מדריך מקיף לפירוש חלומות</h4>
+                    <p>למדו את השיטות המקצועיות לניתוח והבנת החלומות שלכם</p>
+                    <a href="{{ url_for('dream_guide') }}" class="article-link">
+                        קראו עוד
+                        <span class="arrow">←</span>
+                    </a>
+                </article>
+                
+                <article class="article-card">
+                    <div class="article-icon">🤖</div>
+                    <h4>בינה מלאכותית בפירוש חלומות</h4>
+                    <p>גלו איך טכנולוגיה מתקדמת משנה את עולם פירוש החלומות</p>
+                    <a href="{{ url_for('ai_interpretation') }}" class="article-link">
+                        קראו עוד
+                        <span class="arrow">←</span>
+                    </a>
+                </article>
+            </div>
         </div>
     </div>
 
     <!-- Add footer with relevant links -->
     <footer>
-        <p>מפרש החלומות - הדרך המקצועית לפירוש חלומות באמצעות בינה מלאכותית</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>מפרש החלומות</h4>
+                <p>הדרך המקצועית לפירוש חלומות באמצעות בינה מלאכותית</p>
+            </div>
+            <div class="footer-links">
+                <a href="{{ url_for('faq') }}">שאלות נפוצות</a>
+                <a href="{{ url_for('dream_guide') }}">מדריך לפירוש חלומות</a>
+                <a href="{{ url_for('ai_interpretation') }}">בינה מלאכותית וחלומות</a>
+            </div>
+        </div>
     </footer>
 
     <script>
