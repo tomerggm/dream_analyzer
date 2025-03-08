@@ -218,11 +218,6 @@ body::after {
     100% { transform: translateY(0) translateX(0); }
 }
 
-/* שאר הטקסטים באתר ישארו עם הפונט הרגיל */
-h1, h2, p:not(#interpretationText) {
-    /* נמחק לגמרי */
-}
-
 /* Mobile Responsive Design */
 @media screen and (max-width: 768px) {
     body {
