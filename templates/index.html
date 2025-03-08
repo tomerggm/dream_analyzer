@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+
+{% block head %}
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -68,145 +71,145 @@
     <link rel="alternate" hreflang="he" href="https://halomotai.co.il" />
     <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-</head>
-<body>
-    <div class="container">
-        <h1>מפרש החלומות - פירוש חלומות באמצעות בינה מלאכותית</h1>
-        
-        <div class="benefits-grid">
-            <div class="benefit-item">
-                <span class="benefit-icon">⚡️</span>
-                <span class="benefit-text">פירוש מיידי 24/7</span>
-            </div>
-            <div class="benefit-item">
-                <span class="benefit-icon">🔍</span>
-                <span class="benefit-text">ניתוח מעמיק ומקצועי</span>
-            </div>
-            <div class="benefit-item">
-                <span class="benefit-icon">🎁</span>
-                <span class="benefit-text">שירות חינמי לחלוטין</span>
-            </div>
-            <div class="benefit-item">
-                <span class="benefit-icon">🔒</span>
-                <span class="benefit-text">פרטיות מלאה</span>
-            </div>
-            <div class="benefit-item">
-                <span class="benefit-icon">🇮🇱</span>
-                <span class="benefit-text">ממשק ידידותי בעברית</span>
-            </div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>מפרש החלומות - פירוש חלומות באמצעות בינה מלאכותית</h1>
+    
+    <div class="benefits-grid">
+        <div class="benefit-item">
+            <span class="benefit-icon">⚡️</span>
+            <span class="benefit-text">פירוש מיידי 24/7</span>
         </div>
-
-        <div class="intro-text">
-            <p>ברוכים הבאים למפרש החלומות - הכלי המתקדם ביותר לפענוח והבנת החלומות שלכם.</p>
-            <div class="faq-button-container">
-                <a href="{{ url_for('faq') }}" class="faq-button">
-                    <span class="faq-icon">❓</span>
-                    <span>שאלות נפוצות על חלומות</span>
-                </a>
-            </div>
+        <div class="benefit-item">
+            <span class="benefit-icon">🔍</span>
+            <span class="benefit-text">ניתוח מעמיק ומקצועי</span>
         </div>
-
-        <form id="dreamForm" action="/interpret" method="post">
-            <textarea id="dream" name="dream" rows="5" placeholder="תארו את החלום שלכם כאן..."></textarea>
-            <button type="submit">פרש את החלום</button>
-        </form>
-
-        <div id="loading" class="loading hidden">
-            <div>
-                <div class="loading-text">מפענח את החלום שלך...</div>
-                <div class="loading-dots">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
+        <div class="benefit-item">
+            <span class="benefit-icon">🎁</span>
+            <span class="benefit-text">שירות חינמי לחלוטין</span>
         </div>
-
-        <div id="result" class="hidden">
-            <h2>פירוש החלום</h2>
-            <p id="interpretationText"></p>
+        <div class="benefit-item">
+            <span class="benefit-icon">🔒</span>
+            <span class="benefit-text">פרטיות מלאה</span>
         </div>
+        <div class="benefit-item">
+            <span class="benefit-icon">🇮🇱</span>
+            <span class="benefit-text">ממשק ידידותי בעברית</span>
+        </div>
+    </div>
 
-        <!-- Articles Section -->
-        <div class="articles-section">
-            <h3>מאמרים מומלצים</h3>
-            <div class="articles-grid">
-                <article class="article-card">
-                    <div class="article-icon">📚</div>
-                    <h4>מדריך מקיף לפירוש חלומות</h4>
-                    <p>למדו את השיטות המקצועיות לניתוח והבנת החלומות שלכם</p>
-                    <a href="{{ url_for('dream_guide') }}" class="article-link">
-                        קראו עוד
-                        <span class="arrow">←</span>
-                    </a>
-                </article>
-                
-                <article class="article-card">
-                    <div class="article-icon">🤖</div>
-                    <h4>בינה מלאכותית בפירוש חלומות</h4>
-                    <p>גלו איך טכנולוגיה מתקדמת משנה את עולם פירוש החלומות</p>
-                    <a href="{{ url_for('ai_interpretation') }}" class="article-link">
-                        קראו עוד
-                        <span class="arrow">←</span>
-                    </a>
-                </article>
+    <div class="intro-text">
+        <p>ברוכים הבאים למפרש החלומות - הכלי המתקדם ביותר לפענוח והבנת החלומות שלכם.</p>
+        <div class="faq-button-container">
+            <a href="/faq" class="faq-button">
+                <span class="faq-icon">❓</span>
+                <span>שאלות נפוצות על חלומות</span>
+            </a>
+        </div>
+    </div>
+
+    <form id="dreamForm" action="/interpret" method="post">
+        <textarea id="dream" name="dream" rows="5" placeholder="תארו את החלום שלכם כאן..."></textarea>
+        <button type="submit">פרש את החלום</button>
+    </form>
+
+    <div id="loading" class="loading hidden">
+        <div>
+            <div class="loading-text">מפענח את החלום שלך...</div>
+            <div class="loading-dots">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </div>
 
-    <!-- Add footer with relevant links -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>מפרש החלומות</h4>
-                <p>הדרך המקצועית לפירוש חלומות באמצעות בינה מלאכותית</p>
-            </div>
-            <div class="footer-links">
-                <a href="{{ url_for('faq') }}">שאלות נפוצות</a>
-                <a href="{{ url_for('dream_guide') }}">מדריך לפירוש חלומות</a>
-                <a href="{{ url_for('ai_interpretation') }}">בינה מלאכותית וחלומות</a>
-            </div>
-        </div>
-    </footer>
+    <div id="result" class="hidden">
+        <h2>פירוש החלום</h2>
+        <p id="interpretationText"></p>
+    </div>
 
-    <script>
-        document.getElementById("dreamForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
-            let dreamText = document.getElementById("dream").value;
-            let resultDiv = document.getElementById("result");
-            let loadingDiv = document.getElementById("loading");
-            let interpretationText = document.getElementById("interpretationText");
+    <!-- Articles Section -->
+    <div class="articles-section">
+        <h3>מאמרים מומלצים</h3>
+        <div class="articles-grid">
+            <article class="article-card">
+                <div class="article-icon">📚</div>
+                <h4>מדריך מקיף לפירוש חלומות</h4>
+                <p>למדו את השיטות המקצועיות לניתוח והבנת החלומות שלכם</p>
+                <a href="/articles/dream-interpretation-guide" class="article-link">
+                    קראו עוד
+                    <span class="arrow">←</span>
+                </a>
+            </article>
             
-            // Hide result and show loading
-            resultDiv.classList.add("hidden");
-            loadingDiv.classList.remove("hidden");
+            <article class="article-card">
+                <div class="article-icon">🤖</div>
+                <h4>בינה מלאכותית בפירוש חלומות</h4>
+                <p>גלו איך טכנולוגיה מתקדמת משנה את עולם פירוש החלומות</p>
+                <a href="/articles/ai-dream-interpretation" class="article-link">
+                    קראו עוד
+                    <span class="arrow">←</span>
+                </a>
+            </article>
+        </div>
+    </div>
+</div>
+
+<!-- Add footer with relevant links -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>מפרש החלומות</h4>
+            <p>הדרך המקצועית לפירוש חלומות באמצעות בינה מלאכותית</p>
+        </div>
+        <div class="footer-links">
+            <a href="/faq">שאלות נפוצות</a>
+            <a href="/articles/dream-interpretation-guide">מדריך לפירוש חלומות</a>
+            <a href="/articles/ai-dream-interpretation">בינה מלאכותית וחלומות</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.getElementById("dreamForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+        let dreamText = document.getElementById("dream").value;
+        let resultDiv = document.getElementById("result");
+        let loadingDiv = document.getElementById("loading");
+        let interpretationText = document.getElementById("interpretationText");
+        
+        // Hide result and show loading
+        resultDiv.classList.add("hidden");
+        loadingDiv.classList.remove("hidden");
+        
+        try {
+            let response = await fetch("/interpret", {
+                method: "POST",
+                headers: {"Content-Type": "application/x-www-form-urlencoded"},
+                body: new URLSearchParams({dream: dreamText})
+            });
             
-            try {
-                let response = await fetch("/interpret", {
-                    method: "POST",
-                    headers: {"Content-Type": "application/x-www-form-urlencoded"},
-                    body: new URLSearchParams({dream: dreamText})
-                });
-                
-                let data = await response.json();
-                
-                // Hide loading
-                loadingDiv.classList.add("hidden");
-                
-                if (data.interpretation) {
-                    interpretationText.textContent = data.interpretation;
-                    resultDiv.classList.remove("hidden");
-                } else {
-                    interpretationText.textContent = "Error: " + data.error;
-                    resultDiv.classList.remove("hidden");
-                }
-            } catch (error) {
-                // Hide loading and show error
-                loadingDiv.classList.add("hidden");
-                interpretationText.textContent = "אירעה שגיאה בפענוח החלום. אנא נסו שנית.";
+            let data = await response.json();
+            
+            // Hide loading
+            loadingDiv.classList.add("hidden");
+            
+            if (data.interpretation) {
+                interpretationText.textContent = data.interpretation;
+                resultDiv.classList.remove("hidden");
+            } else {
+                interpretationText.textContent = "Error: " + data.error;
                 resultDiv.classList.remove("hidden");
             }
-        });
-    </script>
-</body>
-</html>
+        } catch (error) {
+            // Hide loading and show error
+            loadingDiv.classList.add("hidden");
+            interpretationText.textContent = "אירעה שגיאה בפענוח החלום. אנא נסו שנית.";
+            resultDiv.classList.remove("hidden");
+        }
+    });
+</script>
+{% endblock %}

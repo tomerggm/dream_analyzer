@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon.png') }}">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-03VBN4LXFH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-03VBN4LXFH');
+
+        // Custom Event Tracking
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track dream interpretations
+            const dreamForm = document.getElementById('dreamForm');
+            if (dreamForm) {
+                dreamForm.addEventListener('submit', function() {
+                    gtag('event', 'dream_interpretation', {
+                        'event_category': 'Engagement',
+                        'event_label': document.getElementById('dream').value.length > 0 ? 'With Content' : 'Empty'
+                    });
+                });
+            }
+
+            // Track article reads
+            const articleContent = document.querySelector('.article-content');
+            if (articleContent) {
+                let hasReachedBottom = false;
+                window.addEventListener('scroll', function() {
+                    if (!hasReachedBottom && 
+                        (window.innerHeight + window.scrollY) >= articleContent.offsetHeight) {
+                        hasReachedBottom = true;
+                        gtag('event', 'article_complete', {
+                            'event_category': 'Reading',
+                            'event_label': document.title
+                        });
+                    }
+                });
+            }
+
+            // Track FAQ interactions
+            const faqDetails = document.querySelectorAll('details');
+            if (faqDetails.length > 0) {
+                faqDetails.forEach(detail => {
+                    detail.addEventListener('toggle', function() {
+                        if (this.open) {
+                            gtag('event', 'faq_open', {
+                                'event_category': 'Content',
+                                'event_label': this.querySelector('summary').textContent
+                            });
+                        }
+                    });
+                });
+            }
+
+            // Track navigation clicks
+            document.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    gtag('event', 'navigation_click', {
+                        'event_category': 'Navigation',
+                        'event_label': this.href
+                    });
+                });
+            });
+        });
+    </script>
+
+    {% block head %}{% endblock %}
+</head>
+<body>
+    {% block content %}{% endblock %}
+</body>
+</html> 

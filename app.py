@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, url_for
+from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, url_for, send_file
 from openai import OpenAI
 
 app = Flask(__name__)
@@ -30,8 +30,11 @@ def interpret():
             max_tokens=300
         )
         interpretation = response.choices[0].message.content
+        # Log dream themes for analytics
+        app.logger.info(f"Dream interpretation request - Length: {len(dream_text)}")
         return jsonify({'interpretation': interpretation})
     except Exception as e:
+        app.logger.error(f"Error in dream interpretation: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
 @app.route('/robots.txt')
@@ -55,9 +58,25 @@ def dreams_hebrew():
 def dream_interpretation_hebrew():
     return redirect(url_for('index'))
 
+@app.route('/בינה-מלאכותית-וחלומות')
+def ai_dreams_hebrew():
+    return redirect(url_for('ai_interpretation'))
+
+@app.route('/מדריך-לפירוש-חלומות')
+def guide_hebrew():
+    return redirect(url_for('dream_guide'))
+
+@app.route('/שאלות-נפוצות')
+def faq_hebrew():
+    return redirect(url_for('faq'))
+
 @app.route('/faq')
 def faq():
     return render_template('faq.html')
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(app.static_folder, 'favicon.png', mimetype='image/png')
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 8080))
