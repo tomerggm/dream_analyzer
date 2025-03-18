@@ -14,8 +14,11 @@ client = OpenAI(
 def index():
     return render_template('index.html')
 
-@app.route('/interpret', methods=['POST'])
+@app.route('/interpret', methods=['GET', 'POST'])
 def interpret():
+    if request.method == 'GET':
+        return redirect(url_for('index'))
+
     dream_text = request.form.get('dream')
     if not dream_text:
         return jsonify({'error': 'נא להזין חלום'}), 400
