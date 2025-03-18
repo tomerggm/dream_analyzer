@@ -95,6 +95,24 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
+        .header-nav {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .header-nav a {
+            color: #9c27b0;
+            text-decoration: none;
+            font-size: 1.1em;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .header-nav a:hover {
+            opacity: 1;
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -108,6 +126,11 @@
     {% block head %}{% endblock %}
 </head>
 <body>
+    <nav class="header-nav">
+        <a href="/faq">שאלות נפוצות</a>
+        <a href="/articles/dream-interpretation-guide">מדריך לפירוש חלומות</a>
+        <a href="/articles/ai-dream-interpretation">בינה מלאכותית וחלומות</a>
+    </nav>
     {% block content %}{% endblock %}
 </body>
 </html> 

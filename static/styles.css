@@ -529,7 +529,7 @@ footer {
     }
 }
 
-/* Benefits Grid */
+/* Benefits Grid - Updated Design */
 .benefits-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -538,20 +538,15 @@ footer {
 }
 
 .benefit-item {
-    background: rgba(255, 255, 255, 0.9);
+    background: none;
     padding: 15px;
-    border-radius: 12px;
     display: flex;
     align-items: center;
     gap: 12px;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(156, 39, 176, 0.1);
-}
-
-.benefit-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(156, 39, 176, 0.1);
-    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    box-shadow: none;
+    pointer-events: none;
+    user-select: none;
 }
 
 .benefit-icon {
@@ -561,15 +556,15 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(156, 39, 176, 0.1);
-    border-radius: 50%;
+    background: none;
     padding: 8px;
+    opacity: 0.8;
 }
 
 .benefit-text {
     color: #4a154b;
     font-size: 1.1em;
-    font-weight: 500;
+    opacity: 0.9;
 }
 
 /* Mobile adjustments */
