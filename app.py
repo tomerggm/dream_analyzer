@@ -53,9 +53,17 @@ def dream_guide():
 def ai_interpretation():
     return render_template('articles/ai-dream-interpretation.html')
 
+@app.route('/articles/recurring-dreams')
+def recurring_dreams():
+    return render_template('articles/recurring-dreams.html')
+
 @app.route('/חלומות')
 def dreams_hebrew():
     return redirect(url_for('index'))
+
+@app.route('/חלומות-חוזרים')
+def recurring_dreams_hebrew():
+    return redirect(url_for('recurring_dreams'))
 
 @app.route('/פירוש-חלומות')
 def dream_interpretation_hebrew():

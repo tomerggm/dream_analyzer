@@ -127,9 +127,11 @@
 </head>
 <body>
     <nav class="header-nav">
-        <a href="/faq">שאלות נפוצות</a>
-        <a href="/articles/dream-interpretation-guide">מדריך לפירוש חלומות</a>
-        <a href="/articles/ai-dream-interpretation">בינה מלאכותית וחלומות</a>
+        <a href="{{ url_for('index') }}">בית</a>
+        <a href="{{ url_for('dream_guide') }}">מדריך לפירוש חלומות</a>
+        <a href="{{ url_for('ai_interpretation') }}">בינה מלאכותית ופירוש חלומות</a>
+        <a href="{{ url_for('recurring_dreams') }}">חלומות חוזרים</a>
+        <a href="{{ url_for('faq') }}">שאלות נפוצות</a>
     </nav>
     {% block content %}{% endblock %}
 </body>
