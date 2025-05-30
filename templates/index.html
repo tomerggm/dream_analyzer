@@ -112,8 +112,18 @@
 
     <form id="dreamForm" action="/interpret" method="post">
         <textarea id="dream" name="dream" rows="5" placeholder="תארו את החלום שלכם כאן..."></textarea>
-        <button type="submit">פרש את החלום</button>
+        <button type="submit" id="dreamSubmit">פרש את החלום</button>
     </form>
+
+    <!-- Email Modal -->
+    <div id="emailModal" class="hidden" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 1000;">
+        <div style="background: #fff; padding: 30px 20px; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); min-width: 300px; text-align: center;">
+            <label for="email" style="font-size: 1.1em;">אנא הזן כתובת אימייל כדי לקבל את פירוש החלום:</label><br>
+            <input type="email" id="email" name="email" placeholder="כתובת אימייל" style="margin: 15px 0; padding: 10px; width: 90%; border-radius: 6px; border: 1px solid #ccc; font-size: 1em;" required>
+            <br>
+            <button id="submitEmail" type="button" style="background: linear-gradient(45deg, #9c27b0, #673ab7); color: white; padding: 10px 25px; border: none; border-radius: 50px; font-size: 1em; font-weight: 600;">שלח</button>
+        </div>
+    </div>
 
     <div id="loading" class="loading hidden">
         <div>
@@ -184,29 +194,40 @@
 </footer>
 
 <script>
-    document.getElementById("dreamForm").addEventListener("submit", async function(event) {
+    document.getElementById("dreamForm").addEventListener("submit", function(event) {
         event.preventDefault();
         let dreamText = document.getElementById("dream").value;
+        if (!dreamText.trim()) {
+            alert("אנא הזן חלום לפני שליחה.");
+            return;
+        }
+        // Show email modal
+        document.getElementById("emailModal").classList.remove("hidden");
+    });
+
+    document.getElementById("submitEmail").addEventListener("click", async function(event) {
+        event.preventDefault();
+        let dreamText = document.getElementById("dream").value;
+        let email = document.getElementById("email").value;
         let resultDiv = document.getElementById("result");
         let loadingDiv = document.getElementById("loading");
         let interpretationText = document.getElementById("interpretationText");
-        
-        // Hide result and show loading
+        if (!email || !email.includes("@")) {
+            alert("אנא הזן כתובת אימייל תקינה.");
+            return;
+        }
+        // Hide modal, show loading
+        document.getElementById("emailModal").classList.add("hidden");
         resultDiv.classList.add("hidden");
         loadingDiv.classList.remove("hidden");
-        
         try {
             let response = await fetch("/interpret", {
                 method: "POST",
                 headers: {"Content-Type": "application/x-www-form-urlencoded"},
-                body: new URLSearchParams({dream: dreamText})
+                body: new URLSearchParams({dream: dreamText, email: email})
             });
-            
             let data = await response.json();
-            
-            // Hide loading
             loadingDiv.classList.add("hidden");
-            
             if (data.interpretation) {
                 interpretationText.textContent = data.interpretation;
                 resultDiv.classList.remove("hidden");
@@ -215,7 +236,6 @@
                 resultDiv.classList.remove("hidden");
             }
         } catch (error) {
-            // Hide loading and show error
             loadingDiv.classList.add("hidden");
             interpretationText.textContent = "אירעה שגיאה בפענוח החלום. אנא נסו שנית.";
             resultDiv.classList.remove("hidden");

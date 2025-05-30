@@ -21,12 +21,13 @@ def interpret():
         return redirect(url_for('index'))
 
     dream_text = request.form.get('dream')
+    email = request.form.get('email')
     if not dream_text:
         return jsonify({'error': 'מצטער, אינני יכול לפרש חלום מבלי שתזין או תזיני חלום :)'}), 400
-    # Save dream to CSV
+    # Save email and dream to CSV
     with open('dreams.csv', 'a', newline='', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow([dream_text])
+        writer.writerow([email, dream_text])
 
     try:
         response = client.chat.completions.create(
