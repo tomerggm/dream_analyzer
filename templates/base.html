@@ -85,7 +85,7 @@
             margin: 0;
             padding: 20px;
             min-height: 100vh;
-            background: linear-gradient(135deg, #2a1b3d 0%, #1a1b4b 100%);
+            ckground: linear-gradient(135deg, #2a1b3d 0%, #1a1b4b 100%);
             background-attachment: fixed;
             display: flex;
             flex-direction: column;
@@ -126,13 +126,6 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-    <nav class="header-nav">
-        <a href="{{ url_for('index') }}">בית</a>
-        <a href="{{ url_for('dream_guide') }}">מדריך לפירוש חלומות</a>
-        <a href="{{ url_for('ai_interpretation') }}">בינה מלאכותית ופירוש חלומות</a>
-        <a href="{{ url_for('recurring_dreams') }}">חלומות חוזרים</a>
-        <a href="{{ url_for('faq') }}">שאלות נפוצות</a>
-    </nav>
     {% block content %}{% endblock %}
 </body>
 </html> 

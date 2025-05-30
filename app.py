@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, url_for, send_file, make_response
 from openai import OpenAI
+import csv
 
 app = Flask(__name__)
 
@@ -21,7 +22,11 @@ def interpret():
 
     dream_text = request.form.get('dream')
     if not dream_text:
-        return jsonify({'error': 'נא להזין חלום'}), 400
+        return jsonify({'error': 'מצטער, אינני יכול לפרש חלום מבלי שתזין או תזיני חלום :)'}), 400
+    # Save dream to CSV
+    with open('dreams.csv', 'a', newline='', encoding='utf-8') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow([dream_text])
 
     try:
         response = client.chat.completions.create(
