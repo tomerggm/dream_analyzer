@@ -290,6 +290,15 @@
     premiumButton.addEventListener("click", function() {
         premiumModal.classList.remove("hidden");
         window.scrollTo({ top: 0, behavior: "smooth" });
+
+        // Track Premium button click in Google Analytics
+        if (typeof gtag === 'function') {
+            gtag('event', 'click', {
+              'event_category': 'Premium Offer',
+              'event_action': 'Click Premium Button - Open Modal',
+              'event_label': 'Premium Interpretation'
+            });
+        }
     });
 
     closePremiumModal.addEventListener("click", function() {
