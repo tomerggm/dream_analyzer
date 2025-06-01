@@ -194,6 +194,9 @@
 </footer>
 
 <script>
+    const emailModal = document.getElementById("emailModal");
+    const emailInput = document.getElementById("email");
+
     document.getElementById("dreamForm").addEventListener("submit", function(event) {
         event.preventDefault();
         let dreamText = document.getElementById("dream").value;
@@ -201,8 +204,9 @@
             alert("אנא הזן חלום לפני שליחה.");
             return;
         }
-        // Show email modal
-        document.getElementById("emailModal").classList.remove("hidden");
+        emailModal.classList.remove("hidden");
+        emailInput.focus();
+        window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
     document.getElementById("submitEmail").addEventListener("click", async function(event) {
