@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="premium-result">
+        <h1>פירוש חלום מורחב ומעמיק</h1>
+        <div class="interpretation-content">
+            {{ interpretation | safe | nl2br }}
+        </div>
+        <div class="back-button">
+            <a href="/" class="button">חזרה לדף הבית</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .premium-result {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+    }
+
+    .interpretation-content {
+        margin: 30px 0;
+        line-height: 1.6;
+        font-size: 1.1em;
+        white-space: pre-line;
+    }
+
+    .back-button {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .button {
+        display: inline-block;
+        background: linear-gradient(45deg, #9c27b0, #673ab7);
+        color: white;
+        padding: 12px 30px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: transform 0.2s;
+    }
+
+    .button:hover {
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %} 

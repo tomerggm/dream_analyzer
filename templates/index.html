@@ -139,6 +139,41 @@
     <div id="result" class="hidden">
         <h2>פירוש החלום</h2>
         <p id="interpretationText"></p>
+        <div class="premium-offer">
+            <button id="premiumButton" class="premium-button">
+                <span class="premium-icon">✨</span>
+                קבל פירוש מורחב ומעמיק
+                <span class="premium-price">₪19.90</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Premium Modal -->
+    <div id="premiumModal" class="hidden" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 1000;">
+        <div style="background: #fff; padding: 30px 20px; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); min-width: 300px; text-align: center; max-width: 90%;">
+            <h3 style="color: #673ab7; margin-bottom: 10px;">פירוש חלום מורחב ומעמיק</h3>
+            <div style="margin-bottom: 20px;">
+                <p style="font-size: 1.1em; margin-bottom: 15px;">הפירוש המורחב כולל:</p>
+                <ul style="text-align: right; list-style: none; padding: 0;">
+                    <li style="margin-bottom: 10px;">🤖 מבוסס על ניתוח מתקדם של מודל AI מהטובים ביותר בשוק</li>
+                    <li style="margin-bottom: 10px;">✨ ניתוח מעמיק של סמלים ומוטיבים</li>
+                    <li style="margin-bottom: 10px;">🎯 המלצות מעשיות להתמודדות</li>
+                    <li style="margin-bottom: 10px;">📊 פירוש בהקשר אישי</li>
+                    <li style="margin-bottom: 10px;">💫 תובנות נוספות לחלום</li>
+                </ul>
+            </div>
+            <div style="margin: 20px 0;">
+                <span style="font-size: 1.2em; font-weight: bold; color: #673ab7;">₪19.90</span>
+            </div>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+              <input type="hidden" name="cmd" value="_s-xclick" />
+              <input type="hidden" name="hosted_button_id" value="TRGB5FW8MYWZ4" />
+              <input type="hidden" name="currency_code" value="ILS" />
+              <input type="image" src="https://www.paypalobjects.com/he_IL/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" title="PayPal היא הדרך הקלה והבטוחה יותר לשלם באינטרנט!" alt="קנה עכשיו" />
+            </form>
+            <div id="payment-message" class="hidden" style="color: rgb(105, 115, 134); text-align: center; font-size: 16px; line-height: 20px; padding-top: 12px;"></div>
+            <button id="closePremiumModal" style="background: none; border: none; color: #666; text-decoration: underline; cursor: pointer;">סגור</button>
+        </div>
     </div>
 
     <!-- Articles Section -->
@@ -196,6 +231,10 @@
 <script>
     const emailModal = document.getElementById("emailModal");
     const emailInput = document.getElementById("email");
+    const premiumModal = document.getElementById("premiumModal");
+    const premiumButton = document.getElementById("premiumButton");
+    const closePremiumModal = document.getElementById("closePremiumModal");
+    const paymentMessage = document.getElementById("payment-message");
 
     document.getElementById("dreamForm").addEventListener("submit", function(event) {
         event.preventDefault();
@@ -245,5 +284,79 @@
             resultDiv.classList.remove("hidden");
         }
     });
+
+    // Premium modal handlers
+    premiumButton.addEventListener("click", function() {
+        premiumModal.classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    closePremiumModal.addEventListener("click", function() {
+        premiumModal.classList.add("hidden");
+    });
+
+    // Close premium modal when clicking outside
+    premiumModal.addEventListener("click", function(event) {
+        if (event.target === premiumModal) {
+            premiumModal.classList.add("hidden");
+        }
+    });
 </script>
+
+<style>
+    .premium-offer {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .premium-button {
+        background: linear-gradient(45deg, #9c27b0, #673ab7);
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: transform 0.2s;
+    }
+
+    .premium-button:hover {
+        transform: scale(1.05);
+    }
+
+    .premium-icon {
+        font-size: 1.2em;
+    }
+
+    .premium-price {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.9em;
+    }
+
+    #payment-element {
+        margin-bottom: 24px;
+    }
+
+    #payment-message {
+        color: rgb(105, 115, 134);
+        text-align: center;
+        font-size: 16px;
+        line-height: 20px;
+        padding-top: 12px;
+    }
+
+    #payment-element .ElementsApp {
+        border-radius: 4px;
+        padding: 12px;
+        border: 1px solid #E0E0E0;
+        background: white;
+        box-shadow: 0px 1px 3px 0px #E6EBF1;
+    }
+</style>
 {% endblock %}
