@@ -102,6 +102,7 @@
 
     <div class="intro-text">
         <p>ברוכים הבאים למפרש החלומות - הכלי המתקדם ביותר לפענוח והבנת החלומות שלכם.</p>
+        <div id="welcomeMessage" style="text-align: center; font-size: 1.2em; margin-bottom: 15px; color: #673ab7; display: none;"></div>
         <div class="faq-button-container">
             <a href="/faq" class="faq-button">
                 <span class="faq-icon">❓</span>
@@ -236,32 +237,63 @@
     const closePremiumModal = document.getElementById("closePremiumModal");
     const paymentMessage = document.getElementById("payment-message");
     const paypalForm = document.getElementById("paypalForm");
+    const dreamInput = document.getElementById("dream");
+    const resultDiv = document.getElementById("result");
+    const loadingDiv = document.getElementById("loading");
+    const interpretationText = document.getElementById("interpretationText");
+    const welcomeMessageDiv = document.getElementById("welcomeMessage");
 
-    document.getElementById("dreamForm").addEventListener("submit", function(event) {
+    function displayWelcomeMessage(email) {
+        welcomeMessageDiv.textContent = `שלום ${email}`;
+        welcomeMessageDiv.style.display = 'block';
+    }
+
+    function hideWelcomeMessage() {
+        welcomeMessageDiv.style.display = 'none';
+    }
+
+    const savedEmail = sessionStorage.getItem('userEmail');
+    if (savedEmail) {
+        displayWelcomeMessage(savedEmail);
+    }
+
+    document.getElementById("dreamForm").addEventListener("submit", async function(event) {
         event.preventDefault();
-        let dreamText = document.getElementById("dream").value;
+        let dreamText = dreamInput.value;
         if (!dreamText.trim()) {
             alert("אנא הזן חלום לפני שליחה.");
             return;
         }
-        emailModal.classList.remove("hidden");
-        emailInput.focus();
-        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        const userEmail = sessionStorage.getItem('userEmail');
+
+        if (userEmail) {
+            interpretDream(dreamText, userEmail);
+        } else {
+            emailModal.classList.remove("hidden");
+            emailInput.focus();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
     });
 
     document.getElementById("submitEmail").addEventListener("click", async function(event) {
         event.preventDefault();
-        let dreamText = document.getElementById("dream").value;
-        let email = document.getElementById("email").value;
-        let resultDiv = document.getElementById("result");
-        let loadingDiv = document.getElementById("loading");
-        let interpretationText = document.getElementById("interpretationText");
+        let dreamText = dreamInput.value;
+        let email = emailInput.value;
+        
         if (!email || !email.includes("@")) {
             alert("אנא הזן כתובת אימייל תקינה.");
             return;
         }
-        // Hide modal, show loading
-        document.getElementById("emailModal").classList.add("hidden");
+
+        sessionStorage.setItem('userEmail', email);
+        displayWelcomeMessage(email);
+
+        emailModal.classList.add("hidden");
+        interpretDream(dreamText, email);
+    });
+
+    async function interpretDream(dreamText, email) {
         resultDiv.classList.add("hidden");
         loadingDiv.classList.remove("hidden");
         try {
@@ -284,14 +316,12 @@
             interpretationText.textContent = "אירעה שגיאה בפענוח החלום. אנא נסו שנית.";
             resultDiv.classList.remove("hidden");
         }
-    });
+    }
 
-    // Premium modal handlers
     premiumButton.addEventListener("click", function() {
         premiumModal.classList.remove("hidden");
         window.scrollTo({ top: 0, behavior: "smooth" });
 
-        // Track Premium button click in Google Analytics
         if (typeof gtag === 'function') {
             gtag('event', 'click', {
               'event_category': 'Premium Offer',
@@ -305,14 +335,12 @@
         premiumModal.classList.add("hidden");
     });
 
-    // Close premium modal when clicking outside
     premiumModal.addEventListener("click", function(event) {
         if (event.target === premiumModal) {
             premiumModal.classList.add("hidden");
         }
     });
 
-    // Track PayPal button clicks in Google Analytics
     paypalForm.addEventListener("submit", function() {
         if (typeof gtag === 'function') {
             gtag('event', 'click', {
@@ -378,6 +406,21 @@
         border: 1px solid #E0E0E0;
         background: white;
         box-shadow: 0px 1px 3px 0px #E6EBF1;
+    }
+
+    #welcomeMessage {
+        text-align: center;
+        margin: 15px auto;
+        padding: 10px 20px;
+        border-radius: 25px;
+        display: none;
+        max-width: fit-content;
+        background-color: rgba(103, 58, 183, 0.1);
+        border: 1px solid rgba(103, 58, 183, 0.3);
+    }
+
+    html[dir="rtl"] #welcomeMessage {
+        direction: rtl;
     }
 </style>
 {% endblock %}
