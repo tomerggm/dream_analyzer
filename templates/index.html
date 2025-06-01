@@ -165,7 +165,7 @@
             <div style="margin: 20px 0;">
                 <span style="font-size: 1.2em; font-weight: bold; color: #673ab7;">₪19.90</span>
             </div>
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <form id="paypalForm" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
               <input type="hidden" name="cmd" value="_s-xclick" />
               <input type="hidden" name="hosted_button_id" value="TRGB5FW8MYWZ4" />
               <input type="hidden" name="currency_code" value="ILS" />
@@ -235,6 +235,7 @@
     const premiumButton = document.getElementById("premiumButton");
     const closePremiumModal = document.getElementById("closePremiumModal");
     const paymentMessage = document.getElementById("payment-message");
+    const paypalForm = document.getElementById("paypalForm");
 
     document.getElementById("dreamForm").addEventListener("submit", function(event) {
         event.preventDefault();
@@ -299,6 +300,17 @@
     premiumModal.addEventListener("click", function(event) {
         if (event.target === premiumModal) {
             premiumModal.classList.add("hidden");
+        }
+    });
+
+    // Track PayPal button clicks in Google Analytics
+    paypalForm.addEventListener("submit", function() {
+        if (typeof gtag === 'function') {
+            gtag('event', 'click', {
+              'event_category': 'Premium Offer',
+              'event_action': 'Click Buy Now - PayPal',
+              'event_label': 'Premium Interpretation'
+            });
         }
     });
 </script>
