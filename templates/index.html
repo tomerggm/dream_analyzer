@@ -144,7 +144,8 @@
             <button id="premiumButton" class="premium-button">
                 <span class="premium-icon">✨</span>
                 קבל פירוש מורחב ומעמיק
-                <span class="premium-price">₪19.90</span>
+                <span class="premium-price-old">₪19.90</span>
+                <span class="premium-price-new">₪4.90</span>
             </button>
         </div>
     </div>
@@ -164,11 +165,15 @@
                 </ul>
             </div>
             <div style="margin: 20px 0;">
-                <span style="font-size: 1.2em; font-weight: bold; color: #673ab7;">₪19.90</span>
+                <div class="price-display">
+                    <span class="premium-price-old-modal">₪19.90</span>
+                    <span class="premium-price-new-modal">₪4.90</span>
+                </div>
+                <p style="font-size: 0.9em; color: #e91e63; margin-top: 5px;">מחיר השקה לזמן מוגבל!</p>
             </div>
             <form id="paypalForm" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
               <input type="hidden" name="cmd" value="_s-xclick" />
-              <input type="hidden" name="hosted_button_id" value="TRGB5FW8MYWZ4" />
+              <input type="hidden" name="hosted_button_id" value="KY9UPB3L5U2F4" />
               <input type="hidden" name="currency_code" value="ILS" />
               <input type="image" src="https://www.paypalobjects.com/he_IL/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" title="PayPal היא הדרך הקלה והבטוחה יותר לשלם באינטרנט!" alt="קנה עכשיו" />
             </form>
@@ -421,6 +426,37 @@
 
     html[dir="rtl"] #welcomeMessage {
         direction: rtl;
+    }
+
+    .premium-price-old,
+    .premium-price-old-modal {
+        text-decoration: line-through;
+        color: #888; /* Grey color for old price */
+        margin-inline-end: 10px;
+        font-size: 0.9em; /* Slightly smaller font size */
+    }
+
+    .premium-price-new,
+    .premium-price-new-modal {
+        font-size: 1.2em; /* Larger font size for new price */
+        font-weight: bold;
+        color: #e91e63; /* Pink/Red color for emphasis - changed back from #00bcd4 */
+    }
+
+    .premium-price-new-modal {
+         font-size: 1.5em; /* Even larger font size inside modal */
+    }
+
+    .price-display {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    /* Ensure it works with RTL */
+    html[dir="rtl"] .price-display {
+        flex-direction: row-reverse;
     }
 </style>
 {% endblock %}
