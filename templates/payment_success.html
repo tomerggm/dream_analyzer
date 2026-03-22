@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>פירוש החלום שלך - מפרש החלומות</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.png') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <nav class="site-nav">
+        <a href="/" class="home-link">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-text">חזרה לדף הבית</span>
+        </a>
+    </nav>
+
+    {% if error %}
+    <h1>שגיאה</h1>
+    <div class="error-message">
+        <p>{{ error }}</p>
+        <a href="/" class="elegant-button">
+            <span class="button-text">נסו שנית</span>
+        </a>
+    </div>
+    {% else %}
+    <h1>פירוש החלום שלך</h1>
+
+    <div id="result">
+        <div class="interpretation-content">{{ interpretation | safe }}</div>
+
+        <div class="share-section">
+            <p class="share-title">שתפו את החוויה:</p>
+            <div class="share-buttons">
+                <a href="https://api.whatsapp.com/send?text=%D7%A7%D7%99%D7%91%D7%9C%D7%AA%D7%99%20%D7%A4%D7%99%D7%A8%D7%95%D7%A9%20%D7%97%D7%9C%D7%95%D7%9D%20%D7%9E%D7%A7%D7%A6%D7%95%D7%A2%D7%99%20%D7%95%D7%9E%D7%A8%D7%AA%D7%A7!%20%D7%A0%D7%A1%D7%95%20%D7%92%D7%9D%20%D7%90%D7%AA%D7%9D:%20https://halomotai.co.il" target="_blank" class="share-btn whatsapp-btn">
+                    <span>📱</span> שתפו בוואטסאפ
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://halomotai.co.il" target="_blank" class="share-btn facebook-btn">
+                    <span>📘</span> שתפו בפייסבוק
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="elegant-cta">
+        <div class="cta-content">
+            <h2>רוצים לפרש חלום נוסף?</h2>
+            <a href="/" class="elegant-button">
+                <span class="button-text">פרשו חלום נוסף</span>
+                <span class="button-icon">✨</span>
+            </a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>מפרש החלומות</h4>
+            <p>הדרך המקצועית לפירוש חלומות באמצעות בינה מלאכותית</p>
+        </div>
+        <div class="footer-links">
+            <a href="/">דף הבית</a>
+            <a href="/articles">מאמרים</a>
+            <a href="/faq">שאלות נפוצות</a>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .interpretation-content h3 {
+        color: #4a154b;
+        margin: 20px 0 10px;
+        font-size: 1.2em;
+    }
+
+    .interpretation-content h3:first-child {
+        margin-top: 0;
+    }
+
+    .interpretation-content ul {
+        padding-right: 20px;
+        margin: 10px 0;
+    }
+
+    .interpretation-content li {
+        margin: 8px 0;
+        line-height: 1.6;
+    }
+
+    .interpretation-content p {
+        margin: 10px 0;
+        line-height: 1.8;
+    }
+
+    .share-section {
+        margin-top: 25px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(138, 43, 226, 0.1);
+        text-align: center;
+    }
+
+    .share-title {
+        font-size: 1em;
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    .share-buttons {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .share-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95em;
+        transition: all 0.3s ease;
+    }
+
+    .whatsapp-btn {
+        background: #25D366;
+        color: white;
+    }
+
+    .whatsapp-btn:hover {
+        background: #1da851;
+        transform: translateY(-2px);
+    }
+
+    .facebook-btn {
+        background: #1877F2;
+        color: white;
+    }
+
+    .facebook-btn:hover {
+        background: #1565c0;
+        transform: translateY(-2px);
+    }
+
+    .error-message {
+        text-align: center;
+        padding: 30px;
+    }
+
+    .error-message p {
+        font-size: 1.2em;
+        margin-bottom: 20px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .share-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .share-btn {
+            width: 80%;
+            justify-content: center;
+        }
+    }
+</style>
+{% endblock %}

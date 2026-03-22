@@ -1,82 +1,50 @@
 {% extends "base.html" %}
 
 {% block head %}
-<!DOCTYPE html>
-<html lang="he" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO Meta Tags -->
-    <title>מפרש החלומות - פירוש חלומות באמצעות בינה מלאכותית</title>
-    <meta name="description" content="חלומות - פירוש מקצועי ומעמיק של חלומות באמצעות בינה מלאכותית. קבלו משמעות מדויקת לחלומות שלכם באופן מיידי וחינמי. פענוח חלומות אונליין בעברית.">
+    <title>מפרש החלומות - פירוש חלומות מקצועי באמצעות בינה מלאכותית</title>
+    <meta name="description" content="פירוש חלומות מקצועי ומעמיק באמצעות בינה מלאכותית. קבלו ניתוח מעמיק של הסמלים, המשמעויות והתובנות מהחלומות שלכם.">
     <meta name="keywords" content="חלומות, פירוש חלומות, פתרון חלומות, פענוח חלומות, משמעות חלומות, חלום, ספר החלומות, פשר חלומות">
-    
-    <!-- Open Graph Meta Tags for Social Media -->
-    <meta property="og:title" content="חלומות - פירוש מקצועי ומיידי לחלומות שלכם">
-    <meta property="og:description" content="פירוש חלומות אונליין בעברית - גלו את המשמעות האמיתית של החלומות שלכם באופן מיידי וחינמי">
+
+    <meta property="og:title" content="מפרש החלומות - פירוש מקצועי ומעמיק לחלומות שלכם">
+    <meta property="og:description" content="פירוש חלומות מקצועי באמצעות בינה מלאכותית - ניתוח סמלים, תובנות, ועצות">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://halomotai.co.il">
-    
-    <!-- Additional Meta Tags -->
+    <meta property="og:image" content="https://halomotai.co.il{{ url_for('static', filename='logo.png') }}">
+
     <link rel="canonical" href="https://halomotai.co.il" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <meta name="author" content="Dream Analyzer">
+    <meta name="author" content="מפרש החלומות">
     <meta name="language" content="Hebrew">
-    
-    <!-- Favicon -->
+
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon.png') }}">
-    <meta property="og:image" content="https://halomotai.co.il{{ url_for('static', filename='logo.png') }}">
-    
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-03VBN4LXFH"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        
-        gtag('config', 'G-03VBN4LXFH');
-    </script>
-    
-    <link rel="stylesheet" href="/static/styles.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="/static/styles.css"></noscript>
 
-    <!-- Preload important resources -->
-    <link rel="preload" href="/static/favicon.png" as="image">
+    <link rel="alternate" hreflang="he" href="https://halomotai.co.il" />
 
-    <!-- Add structured data for Google -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": ["WebApplication", "WebSite", "FAQPage"],
+      "@type": ["WebApplication", "WebSite"],
       "name": "מפרש החלומות",
-      "description": "חלומות - פירוש וניתוח מקצועי של חלומות באמצעות בינה מלאכותית",
-      "mainEntity": [{
-        "@type": "Question",
-        "name": "מה המשמעות של חלומות חוזרים?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "חלומות חוזרים מצביעים בדרך כלל על נושא או בעיה שטרם פתרנו בחיינו"
-        }
-      }],
+      "description": "פירוש חלומות מקצועי ומעמיק באמצעות בינה מלאכותית",
       "url": "https://halomotai.co.il",
+      "offers": {
+        "@type": "Offer",
+        "price": "{{ price }}",
+        "priceCurrency": "ILS"
+      },
       "sameAs": [
         "https://halomotai.co.il/חלומות",
         "https://halomotai.co.il/פירוש-חלומות"
       ]
     }
     </script>
-
-    <link rel="alternate" hreflang="he" href="https://halomotai.co.il" />
-    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
 {% endblock %}
 
 {% block content %}
 <div class="container">
     <h1>מפרש החלומות - פירוש חלומות באמצעות בינה מלאכותית</h1>
-    
+
     <div class="benefits-grid">
         <div class="benefit-item">
             <span class="benefit-icon">⚡️</span>
@@ -87,8 +55,8 @@
             <span class="benefit-text">ניתוח מעמיק ומקצועי</span>
         </div>
         <div class="benefit-item">
-            <span class="benefit-icon">🎁</span>
-            <span class="benefit-text">שירות חינמי לחלוטין</span>
+            <span class="benefit-icon">🤖</span>
+            <span class="benefit-text">מבוסס GPT-4o</span>
         </div>
         <div class="benefit-item">
             <span class="benefit-icon">🔒</span>
@@ -102,7 +70,6 @@
 
     <div class="intro-text">
         <p>ברוכים הבאים למפרש החלומות - הכלי המתקדם ביותר לפענוח והבנת החלומות שלכם.</p>
-        <div id="welcomeMessage" style="text-align: center; font-size: 1.2em; margin-bottom: 15px; color: #673ab7; display: none;"></div>
         <div class="faq-button-container">
             <a href="/faq" class="faq-button">
                 <span class="faq-icon">❓</span>
@@ -111,24 +78,23 @@
         </div>
     </div>
 
-    <form id="dreamForm" action="/interpret" method="post">
+    <form id="dreamForm">
         <textarea id="dream" name="dream" rows="5" placeholder="תארו את החלום שלכם כאן..."></textarea>
-        <button type="submit" id="dreamSubmit">פרש את החלום</button>
+        <button type="submit" id="dreamSubmit">קבלו פירוש מקצועי - ₪{{ price }}</button>
     </form>
 
-    <!-- Email Modal -->
-    <div id="emailModal" class="hidden" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 1000;">
-        <div style="background: #fff; padding: 30px 20px; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); min-width: 300px; text-align: center;">
-            <label for="email" style="font-size: 1.1em;">אנא הזן כתובת אימייל כדי לקבל את פירוש החלום:</label><br>
-            <input type="email" id="email" name="email" placeholder="כתובת אימייל" style="margin: 15px 0; padding: 10px; width: 90%; border-radius: 6px; border: 1px solid #ccc; font-size: 1em;" required>
-            <br>
-            <button id="submitEmail" type="button" style="background: linear-gradient(45deg, #9c27b0, #673ab7); color: white; padding: 10px 25px; border: none; border-radius: 50px; font-size: 1em; font-weight: 600;">שלח</button>
-        </div>
-    </div>
+    <!-- Hidden PayPal form - submits to your existing hosted button -->
+    <form id="paypalForm" action="https://www.paypal.com/cgi-bin/webscr" method="post" style="display:none;">
+        <input type="hidden" name="cmd" value="_s-xclick" />
+        <input type="hidden" name="hosted_button_id" value="{{ paypal_button_id }}" />
+        <input type="hidden" name="currency_code" value="ILS" />
+        <input type="hidden" name="return" value="{{ request.url_root }}payment-success" />
+        <input type="hidden" name="cancel_return" value="{{ request.url_root }}" />
+    </form>
 
     <div id="loading" class="loading hidden">
         <div>
-            <div class="loading-text">מפענח את החלום שלך...</div>
+            <div class="loading-text">מעביר לתשלום...</div>
             <div class="loading-dots">
                 <span></span>
                 <span></span>
@@ -137,52 +103,6 @@
         </div>
     </div>
 
-    <div id="result" class="hidden">
-        <h2>פירוש החלום</h2>
-        <p id="interpretationText"></p>
-        <div class="premium-offer">
-            <button id="premiumButton" class="premium-button">
-                <span class="premium-icon">✨</span>
-                קבל פירוש מורחב ומעמיק
-                <span class="premium-price-old">₪19.90</span>
-                <span class="premium-price-new">₪4.90</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- Premium Modal -->
-    <div id="premiumModal" class="hidden" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 1000;">
-        <div style="background: #fff; padding: 30px 20px; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); min-width: 300px; text-align: center; max-width: 90%;">
-            <h3 style="color: #673ab7; margin-bottom: 10px;">פירוש חלום מורחב ומעמיק</h3>
-            <div style="margin-bottom: 20px;">
-                <p style="font-size: 1.1em; margin-bottom: 15px;">הפירוש המורחב כולל:</p>
-                <ul style="text-align: right; list-style: none; padding: 0;">
-                    <li style="margin-bottom: 10px;">🤖 מבוסס על ניתוח מתקדם של מודל AI מהטובים ביותר בשוק</li>
-                    <li style="margin-bottom: 10px;">✨ ניתוח מעמיק של סמלים ומוטיבים</li>
-                    <li style="margin-bottom: 10px;">🎯 המלצות מעשיות להתמודדות</li>
-                    <li style="margin-bottom: 10px;">📊 פירוש בהקשר אישי</li>
-                    <li style="margin-bottom: 10px;">💫 תובנות נוספות לחלום</li>
-                </ul>
-            </div>
-            <div style="margin: 20px 0;">
-                <div class="price-display">
-                    <span class="premium-price-old-modal">₪19.90</span>
-                    <span class="premium-price-new-modal">₪4.90</span>
-                </div>
-                <p style="font-size: 0.9em; color: #e91e63; margin-top: 5px;">מחיר השקה לזמן מוגבל!</p>
-            </div>
-            <form id="paypalForm" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-              <input type="hidden" name="cmd" value="_s-xclick" />
-              <input type="hidden" name="hosted_button_id" value="KY9UPB3L5U2F4" />
-              <input type="hidden" name="currency_code" value="ILS" />
-              <input type="image" src="https://www.paypalobjects.com/he_IL/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" title="PayPal היא הדרך הקלה והבטוחה יותר לשלם באינטרנט!" alt="קנה עכשיו" />
-            </form>
-            <div id="payment-message" class="hidden" style="color: rgb(105, 115, 134); text-align: center; font-size: 16px; line-height: 20px; padding-top: 12px;"></div>
-            <button id="closePremiumModal" style="background: none; border: none; color: #666; text-decoration: underline; cursor: pointer;">סגור</button>
-        </div>
-    </div>
-
-    <!-- Articles Section -->
     <div class="articles-section">
         <h3>מאמרים מומלצים</h3>
         <div class="articles-grid">
@@ -195,7 +115,7 @@
                     <span class="arrow">←</span>
                 </a>
             </article>
-            
+
             <article class="article-card">
                 <div class="article-icon">🤖</div>
                 <h4>בינה מלאכותית בפירוש חלומות</h4>
@@ -205,7 +125,7 @@
                     <span class="arrow">←</span>
                 </a>
             </article>
-            
+
             <article class="article-card">
                 <div class="article-icon">🔁</div>
                 <h4>חלומות חוזרים</h4>
@@ -216,10 +136,15 @@
                 </a>
             </article>
         </div>
+        <div class="all-articles-link">
+            <a href="/articles" class="faq-button">
+                <span>📖</span>
+                <span>כל המאמרים על חלומות</span>
+            </a>
+        </div>
     </div>
 </div>
 
-<!-- Add footer with relevant links -->
 <footer>
     <div class="footer-content">
         <div class="footer-section">
@@ -228,6 +153,7 @@
         </div>
         <div class="footer-links">
             <a href="/faq">שאלות נפוצות</a>
+            <a href="/articles">מאמרים</a>
             <a href="/articles/dream-interpretation-guide">מדריך לפירוש חלומות</a>
             <a href="/articles/ai-dream-interpretation">בינה מלאכותית וחלומות</a>
         </div>
@@ -235,228 +161,49 @@
 </footer>
 
 <script>
-    const emailModal = document.getElementById("emailModal");
-    const emailInput = document.getElementById("email");
-    const premiumModal = document.getElementById("premiumModal");
-    const premiumButton = document.getElementById("premiumButton");
-    const closePremiumModal = document.getElementById("closePremiumModal");
-    const paymentMessage = document.getElementById("payment-message");
-    const paypalForm = document.getElementById("paypalForm");
-    const dreamInput = document.getElementById("dream");
-    const resultDiv = document.getElementById("result");
-    const loadingDiv = document.getElementById("loading");
-    const interpretationText = document.getElementById("interpretationText");
-    const welcomeMessageDiv = document.getElementById("welcomeMessage");
+    const dreamInput = document.getElementById('dream');
+    const loadingDiv = document.getElementById('loading');
 
-    function displayWelcomeMessage(email) {
-        welcomeMessageDiv.textContent = `שלום ${email}`;
-        welcomeMessageDiv.style.display = 'block';
-    }
-
-    function hideWelcomeMessage() {
-        welcomeMessageDiv.style.display = 'none';
-    }
-
-    const savedEmail = sessionStorage.getItem('userEmail');
-    if (savedEmail) {
-        displayWelcomeMessage(savedEmail);
-    }
-
-    document.getElementById("dreamForm").addEventListener("submit", async function(event) {
-        event.preventDefault();
-        let dreamText = dreamInput.value;
-        if (!dreamText.trim()) {
-            alert("אנא הזן חלום לפני שליחה.");
+    document.getElementById('dreamForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const dreamText = dreamInput.value.trim();
+        if (!dreamText) {
+            alert('אנא הזינו את החלום שלכם לפני שליחה.');
             return;
         }
 
-        const userEmail = sessionStorage.getItem('userEmail');
+        loadingDiv.classList.remove('hidden');
 
-        if (userEmail) {
-            interpretDream(dreamText, userEmail);
-        } else {
-            emailModal.classList.remove("hidden");
-            emailInput.focus();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-    });
-
-    document.getElementById("submitEmail").addEventListener("click", async function(event) {
-        event.preventDefault();
-        let dreamText = dreamInput.value;
-        let email = emailInput.value;
-        
-        if (!email || !email.includes("@")) {
-            alert("אנא הזן כתובת אימייל תקינה.");
-            return;
-        }
-
-        sessionStorage.setItem('userEmail', email);
-        displayWelcomeMessage(email);
-
-        emailModal.classList.add("hidden");
-        interpretDream(dreamText, email);
-    });
-
-    async function interpretDream(dreamText, email) {
-        resultDiv.classList.add("hidden");
-        loadingDiv.classList.remove("hidden");
         try {
-            let response = await fetch("/interpret", {
-                method: "POST",
-                headers: {"Content-Type": "application/x-www-form-urlencoded"},
-                body: new URLSearchParams({dream: dreamText, email: email})
+            const response = await fetch('/prepare-payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ dream: dreamText })
             });
-            let data = await response.json();
-            loadingDiv.classList.add("hidden");
-            if (data.interpretation) {
-                interpretationText.textContent = data.interpretation;
-                resultDiv.classList.remove("hidden");
+
+            if (response.ok) {
+                if (typeof gtag === 'function') {
+                    gtag('event', 'begin_checkout', {
+                        'event_category': 'Payment',
+                        'event_label': 'Dream Interpretation'
+                    });
+                }
+                document.getElementById('paypalForm').submit();
             } else {
-                interpretationText.textContent = data.error;
-                resultDiv.classList.remove("hidden");
+                loadingDiv.classList.add('hidden');
+                alert('אירעה שגיאה. אנא נסו שנית.');
             }
         } catch (error) {
-            loadingDiv.classList.add("hidden");
-            interpretationText.textContent = "אירעה שגיאה בפענוח החלום. אנא נסו שנית.";
-            resultDiv.classList.remove("hidden");
-        }
-    }
-
-    premiumButton.addEventListener("click", function() {
-        premiumModal.classList.remove("hidden");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-
-        if (typeof gtag === 'function') {
-            gtag('event', 'click', {
-              'event_category': 'Premium Offer',
-              'event_action': 'Click Premium Button - Open Modal',
-              'event_label': 'Premium Interpretation'
-            });
-        }
-    });
-
-    closePremiumModal.addEventListener("click", function() {
-        premiumModal.classList.add("hidden");
-    });
-
-    premiumModal.addEventListener("click", function(event) {
-        if (event.target === premiumModal) {
-            premiumModal.classList.add("hidden");
-        }
-    });
-
-    paypalForm.addEventListener("submit", function() {
-        if (typeof gtag === 'function') {
-            gtag('event', 'click', {
-              'event_category': 'Premium Offer',
-              'event_action': 'Click Buy Now - PayPal',
-              'event_label': 'Premium Interpretation'
-            });
+            loadingDiv.classList.add('hidden');
+            alert('אירעה שגיאה. אנא נסו שנית.');
         }
     });
 </script>
 
 <style>
-    .premium-offer {
-        margin-top: 20px;
+    .all-articles-link {
         text-align: center;
-    }
-
-    .premium-button {
-        background: linear-gradient(45deg, #9c27b0, #673ab7);
-        color: white;
-        padding: 12px 25px;
-        border: none;
-        border-radius: 50px;
-        font-size: 1.1em;
-        font-weight: 600;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        transition: transform 0.2s;
-    }
-
-    .premium-button:hover {
-        transform: scale(1.05);
-    }
-
-    .premium-icon {
-        font-size: 1.2em;
-    }
-
-    .premium-price {
-        background: rgba(255, 255, 255, 0.2);
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 0.9em;
-    }
-
-    #payment-element {
-        margin-bottom: 24px;
-    }
-
-    #payment-message {
-        color: rgb(105, 115, 134);
-        text-align: center;
-        font-size: 16px;
-        line-height: 20px;
-        padding-top: 12px;
-    }
-
-    #payment-element .ElementsApp {
-        border-radius: 4px;
-        padding: 12px;
-        border: 1px solid #E0E0E0;
-        background: white;
-        box-shadow: 0px 1px 3px 0px #E6EBF1;
-    }
-
-    #welcomeMessage {
-        text-align: center;
-        margin: 15px auto;
-        padding: 10px 20px;
-        border-radius: 25px;
-        display: none;
-        max-width: fit-content;
-        background-color: rgba(103, 58, 183, 0.1);
-        border: 1px solid rgba(103, 58, 183, 0.3);
-    }
-
-    html[dir="rtl"] #welcomeMessage {
-        direction: rtl;
-    }
-
-    .premium-price-old,
-    .premium-price-old-modal {
-        text-decoration: line-through;
-        color: #888; /* Grey color for old price */
-        margin-inline-end: 10px;
-        font-size: 0.9em; /* Slightly smaller font size */
-    }
-
-    .premium-price-new,
-    .premium-price-new-modal {
-        font-size: 1.2em; /* Larger font size for new price */
-        font-weight: bold;
-        color: #e91e63; /* Pink/Red color for emphasis - changed back from #00bcd4 */
-    }
-
-    .premium-price-new-modal {
-         font-size: 1.5em; /* Even larger font size inside modal */
-    }
-
-    .price-display {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    /* Ensure it works with RTL */
-    html[dir="rtl"] .price-display {
-        flex-direction: row-reverse;
+        margin-top: 30px;
     }
 </style>
 {% endblock %}

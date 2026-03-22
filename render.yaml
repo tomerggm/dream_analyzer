@@ -3,4 +3,22 @@ services:
     name: dream-interpreter
     runtime: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn wsgi:app 
+    startCommand: gunicorn wsgi:app
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: SECRET_KEY
+        sync: false
+      - key: PAYPAL_BUTTON_ID
+        sync: false
+      - key: INTERPRETATION_PRICE
+        sync: false
+  - type: cron
+    name: generate-dream-article
+    runtime: python
+    schedule: "0 8 */2 * *"
+    buildCommand: pip install -r requirements.txt
+    startCommand: python generate_article.py
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false

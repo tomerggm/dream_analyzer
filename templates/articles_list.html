@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>מאמרים על חלומות ופירוש חלומות - מפרש החלומות</title>
+    <meta name="description" content="מאמרים מקצועיים בעברית על חלומות, פירוש חלומות, סמלים בחלומות, חלומות בתלמוד ועוד. תוכן חדש כל כמה ימים.">
+    <meta property="og:title" content="מאמרים על חלומות - מפרש החלומות">
+    <meta property="og:description" content="מאמרים מקצועיים בעברית על חלומות ופירוש חלומות">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://halomotai.co.il/articles">
+    <link rel="canonical" href="https://halomotai.co.il/articles" />
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <nav class="site-nav">
+        <a href="/" class="home-link">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-text">חזרה לדף הבית</span>
+        </a>
+    </nav>
+
+    <h1>מאמרים על חלומות ופירוש חלומות</h1>
+    <p class="articles-intro">מאמרים מקצועיים בעברית על עולם החלומות, סמלים, פירושים, ועוד.</p>
+
+    <div class="articles-grid">
+        <article class="article-card">
+            <div class="article-icon">📚</div>
+            <h4>מדריך מקיף לפירוש חלומות</h4>
+            <p>למדו את השיטות המקצועיות לניתוח והבנת החלומות שלכם</p>
+            <a href="/articles/dream-interpretation-guide" class="article-link">
+                קראו עוד <span class="arrow">←</span>
+            </a>
+        </article>
+
+        <article class="article-card">
+            <div class="article-icon">🤖</div>
+            <h4>בינה מלאכותית בפירוש חלומות</h4>
+            <p>גלו איך טכנולוגיה מתקדמת משנה את עולם פירוש החלומות</p>
+            <a href="/articles/ai-dream-interpretation" class="article-link">
+                קראו עוד <span class="arrow">←</span>
+            </a>
+        </article>
+
+        <article class="article-card">
+            <div class="article-icon">🔁</div>
+            <h4>חלומות חוזרים</h4>
+            <p>גלה מה המשמעות של חלומות שחוזרים על עצמם וכיצד להתמודד איתם</p>
+            <a href="/articles/recurring-dreams" class="article-link">
+                קראו עוד <span class="arrow">←</span>
+            </a>
+        </article>
+
+        {% for article in articles %}
+        <article class="article-card">
+            <div class="article-icon">📝</div>
+            <h4>{{ article.title }}</h4>
+            <p>{{ article.meta_description }}</p>
+            <div class="article-date">{{ article.date }}</div>
+            <a href="/articles/{{ article.slug }}" class="article-link">
+                קראו עוד <span class="arrow">←</span>
+            </a>
+        </article>
+        {% endfor %}
+    </div>
+
+    <div class="elegant-cta">
+        <div class="cta-content">
+            <h2>רוצים לדעת מה החלום שלכם אומר?</h2>
+            <p>קבלו פירוש מקצועי ומעמיק לחלום שלכם באמצעות בינה מלאכותית</p>
+            <a href="/" class="elegant-button">
+                <span class="button-text">פרשו את החלום שלכם</span>
+                <span class="button-icon">✨</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>מפרש החלומות</h4>
+            <p>הדרך המקצועית לפירוש חלומות באמצעות בינה מלאכותית</p>
+        </div>
+        <div class="footer-links">
+            <a href="/">דף הבית</a>
+            <a href="/faq">שאלות נפוצות</a>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .articles-intro {
+        text-align: center;
+        font-size: 1.2em;
+        color: #666;
+        margin-bottom: 30px;
+    }
+
+    .article-date {
+        font-size: 0.85em;
+        color: #999;
+        margin-top: 5px;
+    }
+</style>
+{% endblock %}
