@@ -3,3 +3,4 @@ dreams.csv
 __pycache__/
 venv/
 articles_data/used_topics.json
+dictionary_data/used_symbols.json

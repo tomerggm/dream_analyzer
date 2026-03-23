@@ -68,6 +68,10 @@
         </div>
     </div>
 
+    <div class="social-proof">
+        <span class="proof-number">{{ dream_count + 1000 }}+</span> חלומות פורשו באתר
+    </div>
+
     <div class="intro-text">
         <p>ברוכים הבאים למפרש החלומות - הכלי המתקדם ביותר לפענוח והבנת החלומות שלכם.</p>
         <div class="faq-button-container">
@@ -80,10 +84,10 @@
 
     <form id="dreamForm">
         <textarea id="dream" name="dream" rows="5" placeholder="תארו את החלום שלכם כאן..."></textarea>
-        <button type="submit" id="dreamSubmit">קבלו פירוש מקצועי - ₪{{ price }}</button>
+        <button type="submit" id="dreamSubmit">פרשו את החלום שלכם</button>
     </form>
 
-    <!-- Hidden PayPal form - submits to your existing hosted button -->
+    <!-- Hidden PayPal form -->
     <form id="paypalForm" action="https://www.paypal.com/cgi-bin/webscr" method="post" style="display:none;">
         <input type="hidden" name="cmd" value="_s-xclick" />
         <input type="hidden" name="hosted_button_id" value="{{ paypal_button_id }}" />
@@ -94,12 +98,59 @@
 
     <div id="loading" class="loading hidden">
         <div>
-            <div class="loading-text">מעביר לתשלום...</div>
+            <div class="loading-text">מפענח את החלום שלך...</div>
             <div class="loading-dots">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
+        </div>
+    </div>
+
+    <!-- Free teaser result + upsell -->
+    <div id="teaserResult" class="hidden">
+        <div class="teaser-content">
+            <h2>פירוש ראשוני</h2>
+            <p id="teaserText"></p>
+        </div>
+        <div class="upsell-section">
+            <h3>רוצים את הניתוח המלא והמעמיק?</h3>
+            <div class="upsell-features">
+                <div class="upsell-feature">✨ ניתוח מעמיק של כל הסמלים בחלום</div>
+                <div class="upsell-feature">💡 תובנות ועצות מעשיות</div>
+                <div class="upsell-feature">📖 הקשר תרבותי ויהודי</div>
+                <div class="upsell-feature">🔍 פירוש מקצועי מבוסס GPT-4o</div>
+            </div>
+            <button id="payButton" class="pay-button">
+                קבלו את הניתוח המלא - ₪{{ price }}
+            </button>
+        </div>
+    </div>
+
+    <!-- Sample interpretation -->
+    <div class="sample-section">
+        <h3>דוגמה לפירוש חלום</h3>
+        <div class="sample-dream-box">
+            <p class="sample-label">החלום:</p>
+            <p>"חלמתי שאני הולך בשביל ביער חשוך ופתאום מגיע לאגם שקט עם מים צלולים"</p>
+        </div>
+        <div class="sample-result-box">
+            <h4>משמעות החלום</h4>
+            <p>היער החשוך מסמל תקופת אי-ודאות בחייך, אולי תהליך פנימי של חיפוש כיוון. הגעתך לאגם שקט מעידה על כך שתגיע בקרוב לפתרון ולשלווה פנימית.</p>
+            <h4>ניתוח סמלים</h4>
+            <ul>
+                <li><strong>יער חשוך:</strong> חוסר ודאות, תהליך של חיפוש עצמי</li>
+                <li><strong>שביל:</strong> הדרך שאתה בוחר בחיים</li>
+                <li><strong>אגם שקט:</strong> שלווה פנימית, רגע של בהירות</li>
+                <li><strong>מים צלולים:</strong> בהירות מחשבתית, טוהר רגשי</li>
+            </ul>
+            <h4>תובנות ועצות</h4>
+            <ul>
+                <li>אפשר לעצמך זמן של שקט והתבוננות - התשובות כבר בפנים</li>
+                <li>חפש רגעים של שלווה ביום-יום, הם ייתנו לך את הבהירות שאתה מחפש</li>
+            </ul>
+            <h4>הקשר תרבותי</h4>
+            <p>במסורת היהודית, מים צלולים מסמלים חכמה וטהרה. כפי שנאמר "מים עמוקים עצה בלב איש" (משלי כ, ה) - המשמעות העמוקה של חלומך מונחת בתוכך.</p>
         </div>
     </div>
 
@@ -111,28 +162,23 @@
                 <h4>מדריך מקיף לפירוש חלומות</h4>
                 <p>למדו את השיטות המקצועיות לניתוח והבנת החלומות שלכם</p>
                 <a href="/articles/dream-interpretation-guide" class="article-link">
-                    קראו עוד
-                    <span class="arrow">←</span>
+                    קראו עוד <span class="arrow">←</span>
                 </a>
             </article>
-
             <article class="article-card">
                 <div class="article-icon">🤖</div>
                 <h4>בינה מלאכותית בפירוש חלומות</h4>
                 <p>גלו איך טכנולוגיה מתקדמת משנה את עולם פירוש החלומות</p>
                 <a href="/articles/ai-dream-interpretation" class="article-link">
-                    קראו עוד
-                    <span class="arrow">←</span>
+                    קראו עוד <span class="arrow">←</span>
                 </a>
             </article>
-
             <article class="article-card">
                 <div class="article-icon">🔁</div>
                 <h4>חלומות חוזרים</h4>
                 <p>גלה מה המשמעות של חלומות שחוזרים על עצמם וכיצד להתמודד איתם</p>
                 <a href="/articles/recurring-dreams" class="article-link">
-                    קראו עוד
-                    <span class="arrow">←</span>
+                    קראו עוד <span class="arrow">←</span>
                 </a>
             </article>
         </div>
@@ -154,8 +200,8 @@
         <div class="footer-links">
             <a href="/faq">שאלות נפוצות</a>
             <a href="/articles">מאמרים</a>
+            <a href="/dictionary">מילון חלומות</a>
             <a href="/articles/dream-interpretation-guide">מדריך לפירוש חלומות</a>
-            <a href="/articles/ai-dream-interpretation">בינה מלאכותית וחלומות</a>
         </div>
     </div>
 </footer>
@@ -163,6 +209,8 @@
 <script>
     const dreamInput = document.getElementById('dream');
     const loadingDiv = document.getElementById('loading');
+    const teaserResult = document.getElementById('teaserResult');
+    const teaserText = document.getElementById('teaserText');
 
     document.getElementById('dreamForm').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -172,38 +220,213 @@
             return;
         }
 
+        teaserResult.classList.add('hidden');
         loadingDiv.classList.remove('hidden');
 
         try {
-            const response = await fetch('/prepare-payment', {
+            const response = await fetch('/interpret-free', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ dream: dreamText })
             });
+            const data = await response.json();
+            loadingDiv.classList.add('hidden');
 
-            if (response.ok) {
+            if (data.teaser) {
+                teaserText.textContent = data.teaser;
+                teaserResult.classList.remove('hidden');
+                teaserResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
                 if (typeof gtag === 'function') {
-                    gtag('event', 'begin_checkout', {
-                        'event_category': 'Payment',
-                        'event_label': 'Dream Interpretation'
+                    gtag('event', 'free_interpretation', {
+                        'event_category': 'Engagement',
+                        'event_label': 'Dream Teaser'
                     });
                 }
-                document.getElementById('paypalForm').submit();
             } else {
-                loadingDiv.classList.add('hidden');
-                alert('אירעה שגיאה. אנא נסו שנית.');
+                alert(data.error || 'אירעה שגיאה. אנא נסו שנית.');
             }
         } catch (error) {
             loadingDiv.classList.add('hidden');
             alert('אירעה שגיאה. אנא נסו שנית.');
         }
     });
+
+    document.getElementById('payButton').addEventListener('click', function() {
+        if (typeof gtag === 'function') {
+            gtag('event', 'begin_checkout', {
+                'event_category': 'Payment',
+                'event_label': 'Full Interpretation'
+            });
+        }
+        document.getElementById('paypalForm').submit();
+    });
 </script>
 
 <style>
+    .social-proof {
+        text-align: center;
+        font-size: 1.1em;
+        color: #4a154b;
+        margin: 15px 0;
+        padding: 10px 20px;
+        background: rgba(138, 43, 226, 0.08);
+        border-radius: 50px;
+        display: inline-block;
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    .proof-number {
+        font-weight: 700;
+        font-size: 1.3em;
+        color: #8a2be2;
+    }
+
+    .teaser-content {
+        padding: 20px;
+        background: rgba(138, 43, 226, 0.05);
+        border-radius: 15px;
+        border-right: 4px solid #8a2be2;
+        margin-bottom: 20px;
+    }
+
+    .teaser-content h2 {
+        color: #4a154b;
+        margin-top: 0;
+        font-size: 1.4em;
+    }
+
+    #teaserText {
+        font-size: 1.15em;
+        line-height: 1.8;
+        color: #2d3748;
+    }
+
+    .upsell-section {
+        text-align: center;
+        padding: 25px;
+        background: linear-gradient(135deg, rgba(138, 43, 226, 0.08), rgba(75, 0, 130, 0.08));
+        border-radius: 15px;
+        border: 1px solid rgba(138, 43, 226, 0.15);
+    }
+
+    .upsell-section h3 {
+        color: #4a154b;
+        margin-top: 0;
+        font-size: 1.3em;
+    }
+
+    .upsell-features {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin: 15px 0 20px;
+        text-align: right;
+    }
+
+    .upsell-feature {
+        padding: 8px 12px;
+        font-size: 0.95em;
+        color: #4a154b;
+    }
+
+    .pay-button {
+        background: linear-gradient(45deg, #9c27b0, #673ab7);
+        color: white;
+        padding: 15px 40px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.2em;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+    }
+
+    .pay-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4);
+    }
+
+    #teaserResult {
+        margin: 20px 0;
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    .sample-section {
+        margin: 50px 0;
+        padding: 25px;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 15px;
+        border: 1px dashed rgba(138, 43, 226, 0.2);
+    }
+
+    .sample-section h3 {
+        color: #4a154b;
+        text-align: center;
+        margin-top: 0;
+        font-size: 1.5em;
+    }
+
+    .sample-dream-box {
+        background: rgba(138, 43, 226, 0.06);
+        padding: 15px 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .sample-label {
+        font-weight: 700;
+        color: #4a154b;
+        margin-bottom: 5px;
+    }
+
+    .sample-dream-box p:last-child {
+        font-style: italic;
+        color: #555;
+        margin: 0;
+    }
+
+    .sample-result-box {
+        padding: 0 10px;
+    }
+
+    .sample-result-box h4 {
+        color: #4a154b;
+        margin: 18px 0 8px;
+        font-size: 1.1em;
+    }
+
+    .sample-result-box h4:first-child {
+        margin-top: 0;
+    }
+
+    .sample-result-box ul {
+        padding-right: 20px;
+        margin: 8px 0;
+    }
+
+    .sample-result-box li {
+        margin: 6px 0;
+        line-height: 1.6;
+    }
+
+    .sample-result-box p {
+        line-height: 1.7;
+    }
+
     .all-articles-link {
         text-align: center;
         margin-top: 30px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .upsell-features {
+            grid-template-columns: 1fr;
+        }
     }
 </style>
 {% endblock %}

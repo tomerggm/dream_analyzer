@@ -22,7 +22,25 @@ INTERPRETATION_PRICE = os.getenv('INTERPRETATION_PRICE', '4.90')
 PAYPAL_BUTTON_ID = os.getenv('PAYPAL_BUTTON_ID', 'KY9UPB3L5U2F4')
 
 ARTICLES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'articles_data')
+DICTIONARY_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'dictionary_data')
 os.makedirs(ARTICLES_DIR, exist_ok=True)
+os.makedirs(DICTIONARY_DIR, exist_ok=True)
+
+
+def interpret_dream_teaser(dream_text):
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": (
+                "אתה מומחה לפירוש חלומות. תן פירוש קצר בשני משפטים בלבד בעברית. "
+                "היה מעניין ומסתורי כדי לעורר סקרנות לדעת עוד. "
+                "רמוז שיש עוד שכבות עמוקות לחלום הזה."
+            )},
+            {"role": "user", "content": f"פרש בקצרה את החלום: {dream_text}"}
+        ],
+        max_tokens=150
+    )
+    return response.choices[0].message.content
 
 
 def interpret_dream(dream_text):
@@ -49,14 +67,26 @@ def interpret_dream(dream_text):
     return response.choices[0].message.content
 
 
+def get_dream_count():
+    try:
+        with open('dreams.csv', 'r', encoding='utf-8') as f:
+            return sum(1 for _ in csv.reader(f))
+    except FileNotFoundError:
+        return 0
+
+
 def load_articles():
     articles = []
     if not os.path.exists(ARTICLES_DIR):
         return articles
     for filepath in glob_module.glob(os.path.join(ARTICLES_DIR, '*.json')):
+        if os.path.basename(filepath) == 'used_topics.json':
+            continue
         try:
             with open(filepath, 'r', encoding='utf-8') as f:
-                articles.append(json.load(f))
+                data = json.load(f)
+                if isinstance(data, dict) and 'title' in data:
+                    articles.append(data)
         except (json.JSONDecodeError, IOError):
             continue
     articles.sort(key=lambda a: a.get('date', ''), reverse=True)
@@ -71,18 +101,57 @@ def load_article_by_slug(slug):
     return None
 
 
+def load_dictionary_entries():
+    entries = []
+    if not os.path.exists(DICTIONARY_DIR):
+        return entries
+    for filepath in glob_module.glob(os.path.join(DICTIONARY_DIR, '*.json')):
+        if os.path.basename(filepath) == 'used_symbols.json':
+            continue
+        try:
+            with open(filepath, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                if isinstance(data, dict) and 'symbol' in data:
+                    entries.append(data)
+        except (json.JSONDecodeError, IOError):
+            continue
+    entries.sort(key=lambda e: e.get('symbol', ''))
+    return entries
+
+
+def load_dictionary_entry(symbol):
+    filepath = os.path.join(DICTIONARY_DIR, f'{symbol}.json')
+    if os.path.exists(filepath):
+        with open(filepath, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return None
+
+
 @app.route('/')
 def index():
-    return render_template('index.html', price=INTERPRETATION_PRICE, paypal_button_id=PAYPAL_BUTTON_ID)
+    dream_count = get_dream_count()
+    return render_template('index.html', price=INTERPRETATION_PRICE,
+                           paypal_button_id=PAYPAL_BUTTON_ID, dream_count=dream_count)
 
 
-@app.route('/prepare-payment', methods=['POST'])
-def prepare_payment():
+@app.route('/interpret-free', methods=['POST'])
+def interpret_free():
     dream_text = request.json.get('dream', '')
     if not dream_text.strip():
         return jsonify({'error': 'נא להזין חלום'}), 400
-    session['dream_text'] = dream_text
-    return jsonify({'ok': True})
+
+    try:
+        teaser = interpret_dream_teaser(dream_text)
+        session['dream_text'] = dream_text
+
+        with open('dreams.csv', 'a', newline='', encoding='utf-8') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow([datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'free-teaser', dream_text])
+
+        return jsonify({'teaser': teaser})
+    except Exception as e:
+        app.logger.error(f"Error in free interpretation: {e}")
+        return jsonify({'error': 'שגיאה בפירוש החלום. אנא נסו שנית.'}), 500
 
 
 @app.route('/payment-success')
@@ -100,7 +169,7 @@ def payment_success():
 
     with open('dreams.csv', 'a', newline='', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow([datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'paypal', dream_text])
+        writer.writerow([datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'paypal-paid', dream_text])
 
     app.logger.info(f"Paid interpretation - Length: {len(dream_text)}")
     return render_template('payment_success.html', interpretation=interpretation)
@@ -116,6 +185,7 @@ def sitemap():
     urls = [
         {'loc': 'https://halomotai.co.il/', 'changefreq': 'daily', 'priority': '1.0'},
         {'loc': 'https://halomotai.co.il/articles', 'changefreq': 'daily', 'priority': '0.9'},
+        {'loc': 'https://halomotai.co.il/dictionary', 'changefreq': 'weekly', 'priority': '0.9'},
         {'loc': 'https://halomotai.co.il/faq', 'changefreq': 'weekly', 'priority': '0.8'},
         {'loc': 'https://halomotai.co.il/articles/dream-interpretation-guide', 'changefreq': 'monthly', 'priority': '0.8'},
         {'loc': 'https://halomotai.co.il/articles/ai-dream-interpretation', 'changefreq': 'monthly', 'priority': '0.8'},
@@ -125,6 +195,13 @@ def sitemap():
         urls.append({
             'loc': f"https://halomotai.co.il/articles/{article['slug']}",
             'lastmod': article.get('date', ''),
+            'changefreq': 'monthly',
+            'priority': '0.7'
+        })
+    for entry in load_dictionary_entries():
+        urls.append({
+            'loc': f"https://halomotai.co.il/dictionary/{entry['symbol']}",
+            'lastmod': entry.get('date', ''),
             'changefreq': 'monthly',
             'priority': '0.7'
         })
@@ -171,6 +248,21 @@ def article_detail(slug):
     if not article:
         return redirect(url_for('articles_list'))
     return render_template('article_detail.html', article=article)
+
+
+@app.route('/dictionary')
+@cache.cached(timeout=300)
+def dictionary_list():
+    entries = load_dictionary_entries()
+    return render_template('dictionary_list.html', entries=entries)
+
+
+@app.route('/dictionary/<symbol>')
+def dictionary_detail(symbol):
+    entry = load_dictionary_entry(symbol)
+    if not entry:
+        return redirect(url_for('dictionary_list'))
+    return render_template('dictionary_detail.html', entry=entry)
 
 
 @app.route('/חלומות')

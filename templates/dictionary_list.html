@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>מילון חלומות - פירוש סמלים בחלומות | מפרש החלומות</title>
+    <meta name="description" content="מילון חלומות מקיף בעברית - פירוש סמלים נפוצים בחלומות כגון מים, טיסה, נחש, נפילה ועוד. גלו את המשמעות של הסמלים בחלומות שלכם.">
+    <meta property="og:title" content="מילון חלומות - פירוש סמלים בחלומות">
+    <meta property="og:description" content="מילון חלומות מקיף בעברית - פירוש סמלים נפוצים בחלומות">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://halomotai.co.il/dictionary">
+    <link rel="canonical" href="https://halomotai.co.il/dictionary" />
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <nav class="site-nav">
+        <a href="/" class="home-link">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-text">חזרה לדף הבית</span>
+        </a>
+    </nav>
+
+    <h1>מילון חלומות - פירוש סמלים בחלומות</h1>
+    <p class="dict-intro">גלו את המשמעות של הסמלים הנפוצים ביותר בחלומות. לחצו על סמל כדי לקרוא את הפירוש המלא.</p>
+
+    {% if entries %}
+    <div class="dictionary-grid">
+        {% for entry in entries %}
+        <a href="/dictionary/{{ entry.symbol }}" class="dict-card">
+            <span class="dict-symbol">{{ entry.symbol }}</span>
+            <span class="dict-title">{{ entry.title }}</span>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="dict-empty">ערכי המילון בהכנה. חזרו בקרוב!</p>
+    {% endif %}
+
+    <div class="elegant-cta">
+        <div class="cta-content">
+            <h2>רוצים לדעת מה החלום שלכם אומר?</h2>
+            <p>קבלו פירוש מקצועי ומעמיק לחלום שלכם באמצעות בינה מלאכותית</p>
+            <a href="/" class="elegant-button">
+                <span class="button-text">פרשו את החלום שלכם</span>
+                <span class="button-icon">✨</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>מפרש החלומות</h4>
+            <p>הדרך המקצועית לפירוש חלומות באמצעות בינה מלאכותית</p>
+        </div>
+        <div class="footer-links">
+            <a href="/">דף הבית</a>
+            <a href="/articles">מאמרים</a>
+            <a href="/faq">שאלות נפוצות</a>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .dict-intro {
+        text-align: center;
+        font-size: 1.15em;
+        color: #666;
+        margin-bottom: 30px;
+    }
+
+    .dictionary-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+        margin: 30px 0;
+    }
+
+    .dict-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 15px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 12px;
+        border: 1px solid rgba(138, 43, 226, 0.1);
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .dict-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(138, 43, 226, 0.15);
+        border-color: rgba(138, 43, 226, 0.3);
+    }
+
+    .dict-symbol {
+        font-size: 1.5em;
+        font-weight: 700;
+        color: #4a154b;
+        margin-bottom: 5px;
+    }
+
+    .dict-title {
+        font-size: 0.85em;
+        color: #666;
+        text-align: center;
+    }
+
+    .dict-empty {
+        text-align: center;
+        font-size: 1.1em;
+        color: #999;
+        padding: 40px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .dictionary-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+</style>
+{% endblock %}
